@@ -27,18 +27,11 @@ export async function getServerSideProps({ query }) {
 
   // let inputWord = wordToTranslate?.split("-meaning-in-")[0];
 
-  try {
-    const resSearch = await axios.post(
-      `https://api.stackaxiom.com/api/search`,
-      {
-        word: wordToTranslate?.split("-meaning-in-")[0],
-      }
-    );
+  const resSearch = await axios.post(`https://api.stackaxiom.com/api/search`, {
+    word: wordToTranslate?.split("-meaning-in-")[0],
+  });
 
-    let englishData = resSearch?.data || null;
-  } catch (err) {
-    console.error("Search API Error:", err);
-  }
+  let englishData = resSearch?.data || null;
 
   const resDetails = await axios.post(
     `https://api.stackaxiom.com/api/en/${
