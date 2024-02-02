@@ -1,4 +1,4 @@
-import WordMeaning from "../../components/alphabets/wordmeaning";
+import WordMeaning from "../../components/alphabets/WordMeaning";
 import Head from "next/head";
 
 function AlphabeticalWord() {
