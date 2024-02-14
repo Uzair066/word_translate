@@ -10,13 +10,13 @@ import { Message_data } from "../../context/context";
 import { useContext } from "react";
 import Loader from "../Loader";
 
-function DictionarySlug({ wordData, slug }) {
+function DictionarySlug({ wordApiData, slug }) {
   const { theme } = useContext(Message_data);
   const router = useRouter();
-  console.log(wordData);
+  console.log(wordApiData);
 
   // const { slug } = router.query;
-  const [wordApiData, setWordApiData] = useState([]);
+  // const [wordApiData, setWordApiData] = useState([]);
   const [inputWord, setInputWord] = useState(slug);
   const [validated, setValidated] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -38,45 +38,15 @@ function DictionarySlug({ wordData, slug }) {
   // let count = 0;
   useEffect(() => {
     // setLoading(true)
-    if (wordData === null) {
+    if (wordApiData === null) {
       setLoading(true);
     } else {
       setInputWord(slug);
-      setWordApiData(wordData);
+      // setWordApiData(wordApiData);
       setLoading(false);
     }
-  }, [slug, wordData]);
+  }, [slug, wordApiData]);
 
-  const getTranslationDetail = async () => {
-    // const { text } = await translate("Привет, мир! Как дела?", { to: "en" });
-    // console.log(text);
-  };
-
-  // const getWordDetails = async () => {
-  //   setLoading(true);
-  //   toast.promise(
-  //     axios.post(`https://api.stackaxiom.com/api/search`, {
-  //       word: slug,
-  //     }),
-  //     {
-  //       loading: () => {
-  //         return `Getting details of ${slug}!`;
-  //       },
-  //       success: (res) => {
-  //         setWordApiData(res?.data);
-  //         setLoading(false);
-  //         count = 0;
-  //         return "Details fetched successfully!";
-  //       },
-  //       error: (err) => {
-  //         setWordApiData([]);
-  //         setLoading(false);
-  //         count = 0;
-  //         return err?.response?.data?.message;
-  //       },
-  //     }
-  //   );
-  // };
   return (
     <Container maxWidth="lg" sx={{ paddingBottom: "90px" }}>
       <Box
@@ -156,239 +126,214 @@ function DictionarySlug({ wordData, slug }) {
         }}
       >
         <Container maxWidth="lg">
-          {loading ? (
-            <Loader />
-          ) : (
-            <>
-              {!!wordApiData.length ? (
-                <>
-                  <Box
-                    sx={{
-                      "& .wordTxt": {
-                        fontSize: "56px",
-                        color: "orange",
-                        fontWeight: "900",
-                        fontFamily: '"Nunito",sans-serif',
-                        textTransform: "capitalize",
-                      },
-                    }}
-                  >
-                    <p className="wordTxt">{slug}</p>
-                  </Box>
-                  <Grid container spacing={4}>
-                    <Grid item xs={12} md={9}>
-                      {!!wordApiData.length &&
-                        wordApiData?.map((item, index) => {
-                          let revertedString = item?.synonyms
-                            ?.replace(/^"|"$/g, "")
-                            .replace(/\\\"/g, '"');
-                          let revertedExamples = item?.examples
-                            ?.replace(/^"|"$/g, "")
-                            .replace(/\\\"/g, '"');
-                          return (
-                            <Box
-                              key={index}
-                              sx={{
-                                marginTop: "20px",
-                                backgroundColor: "#d1d1d1",
-                                borderRadius: "22px",
-                                padding: "34px 34px 34px 34px",
-                                minHeight: "200px",
-                                "& p": {
-                                  fontFamily: '"Nunito",sans-serif',
-                                  marginBottom: "8px",
-                                },
-                              }}
-                            >
-                              <p>
-                                <b>Definition of {slug}: </b>
-                                {item?.definition}
-                              </p>
-                              {item?.synonyms !== '""' && (
-                                <p>
-                                  <b>Synonyms of {slug}: </b>
-                                </p>
-                              )}
-
-                              {item?.synonyms === '""' ? null : (
-                                <Box
-                                  sx={{
-                                    width: "100%",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: 1,
-                                    flexWrap: "wrap",
-                                    paddingBottom: "5px",
-                                    "& p": {
-                                      background: "white",
-                                      padding: "0.5rem",
-                                      borderRadius: "0.25rem",
-                                      textTransform: "capitalize",
-                                      cursor: "pointer",
-                                      "&:hover": {
-                                        backgroundColor: "rgba(180,180,180,1)",
-                                        textDecoration: "underline",
-                                      },
-                                    },
-                                  }}
-                                >
-                                  {item?.synonyms &&
-                                    JSON.parse(revertedString)?.map(
-                                      (data, index) => (
-                                        <p
-                                          key={index}
-                                          onClick={() => router.push(`${data}`)}
-                                        >
-                                          {data}
-                                        </p>
-                                      )
-                                    )}
-                                </Box>
-                              )}
-                              {item?.has_parts !== '""' && (
-                                <p>
-                                  <b>Has Parts: </b>
-                                  {item?.has_parts === '""'
-                                    ? null
-                                    : JSON.parse(
-                                        item?.has_parts
-                                          ?.replace(/^"|"$/g, "")
-                                          .replace(/\\\"/g, '"')
-                                      )?.toString()}
-                                </p>
-                              )}
-                              {item?.is_a_type_of !== '""' && (
-                                <p>
-                                  <b>{slug} is a Type of: </b>
-                                  {item?.is_a_type_of === '""'
-                                    ? null
-                                    : JSON.parse(
-                                        item?.is_a_type_of
-                                          ?.replace(/^"|"$/g, "")
-                                          .replace(/\\\"/g, '"')
-                                      )?.toString()}
-                                </p>
-                              )}
-                              {item?.examples !== '""' && (
-                                <p>
-                                  <b>Examples of {slug}: </b>
-                                </p>
-                              )}
-
-                              {item?.examples === '""' ? null : (
-                                <ul style={{ paddingLeft: "2rem" }}>
-                                  {JSON.parse(revertedExamples)?.map(
-                                    (data, index) => (
-                                      <li key={index}>
-                                        <i>
-                                          <q
-                                            style={{
-                                              fontSize: "16px",
-                                              fontFamily: '"Nunito",sans-serif',
-                                            }}
-                                          >
-                                            {data}
-                                          </q>
-                                        </i>
-                                      </li>
-                                    )
-                                  )}
-                                </ul>
-                              )}
-                            </Box>
-                          );
-                        })}
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                      <Box
-                        sx={{
-                          position: "relative",
-                          marginTop: "20px",
-                          backgroundColor: "#d1d1d1",
-                          borderRadius: "22px",
-                          padding: "10px 30px 30px 30px",
-                          minHeight: "200px",
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            textAlign: "center",
-                            paddingBottom: "10px",
-                            "& .wordTxt": {
-                              fontSize: "40px",
-                              fontWeight: "900",
-                              fontFamily: '"Nunito",sans-serif',
-                              textTransform: "capitalize",
-                              color: "orange",
-                            },
-                          }}
-                        >
-                          <p className="wordTxt">Rhymes</p>
-                        </Box>
-                        {!!wordApiData.length &&
-                        wordApiData?.[0]?.rhymes === '""' ? null : (
+          {loading && <Loader />}
+          <>
+            {!!wordApiData.length ? (
+              <>
+                <Box
+                  sx={{
+                    "& .wordTxt": {
+                      fontSize: "56px",
+                      color: "orange",
+                      fontWeight: "900",
+                      fontFamily: '"Nunito",sans-serif',
+                      textTransform: "capitalize",
+                    },
+                  }}
+                >
+                  <p className="wordTxt">{slug}</p>
+                </Box>
+                <Grid container spacing={4}>
+                  <Grid item xs={12} md={9}>
+                    {!!wordApiData.length &&
+                      wordApiData?.map((item, index) => {
+                        return (
                           <Box
+                            key={index}
                             sx={{
-                              "& .theWord": {
-                                fontWeight: 500,
+                              marginTop: "20px",
+                              backgroundColor: "#d1d1d1",
+                              borderRadius: "22px",
+                              padding: "34px 34px 34px 34px",
+                              minHeight: "200px",
+                              "& p": {
                                 fontFamily: '"Nunito",sans-serif',
-                                width: "100%",
-                                fontSize: "16px",
-                                padding: "5px 7px 5px 11px",
-                                marginBottom: "10px",
-                                transition: ".3s ease",
-                                cursor: "pointer",
-                                borderRadius: "75px",
-                                backgroundColor: "rgba(255,255,255,1)",
-                                color: "black",
-                                display: "flex",
-                                alignItems: "center",
-                                "&:hover": {
-                                  backgroundColor: "rgba(180,180,180,1)",
-                                },
+                                marginBottom: "8px",
                               },
                             }}
                           >
-                            {JSON.parse(
-                              wordApiData[0]?.rhymes
-                                ?.replace(/^"|"$/g, "")
-                                .replace(/\\\"/g, '"') || null
-                            )?.map((data, index) => (
-                              <p
-                                key={index}
-                                onClick={() => router.push(`${data}`)}
-                                className="theWord"
-                              >
-                                <SearchIcon
-                                  sx={{
-                                    fontSize: "16px",
-                                    marginRight: "10px",
-                                  }}
-                                />
-                                {data}
+                            <p>
+                              <b>{`Definition of ${item?.word}: `}</b>
+                              {item?.definition}
+                            </p>
+                            {item?.synonyms !== "" && (
+                              <p>
+                                <b>{`Synonyms of ${slug}: `}</b>
                               </p>
-                            ))}
+                            )}
+
+                            {item?.synonyms === "" ? null : (
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 1,
+                                  flexWrap: "wrap",
+                                  paddingBottom: "5px",
+                                  "& p": {
+                                    background: "white",
+                                    padding: "0.5rem",
+                                    borderRadius: "0.25rem",
+                                    textTransform: "capitalize",
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                      backgroundColor: "rgba(180,180,180,1)",
+                                      textDecoration: "underline",
+                                    },
+                                  },
+                                }}
+                              >
+                                {item?.synonyms &&
+                                  item?.synonyms?.map((data, index) => (
+                                    <p
+                                      key={index}
+                                      onClick={() => router.push(`${data}`)}
+                                    >
+                                      {data}
+                                    </p>
+                                  ))}
+                              </Box>
+                            )}
+                            {item?.has_parts !== "" && (
+                              <p>
+                                <b>Has Parts: </b>
+                                {item?.has_parts === ""
+                                  ? null
+                                  : item?.has_parts?.toString()}
+                              </p>
+                            )}
+                            {item?.is_a_type_of !== "" && (
+                              <p>
+                                <b>{`${slug} is a Type of: `}</b>
+                                {item?.is_a_type_of === ""
+                                  ? null
+                                  : item?.is_a_type_of?.toString()}
+                              </p>
+                            )}
+                            {item?.examples !== "" && (
+                              <p>
+                                <b>{`Examples of ${slug}: `}</b>
+                              </p>
+                            )}
+
+                            {item?.examples === "" ? null : (
+                              <ul style={{ paddingLeft: "2rem" }}>
+                                {item?.examples?.map((data, index) => (
+                                  <li key={index}>
+                                    <i>
+                                      <q
+                                        style={{
+                                          fontSize: "16px",
+                                          fontFamily: '"Nunito",sans-serif',
+                                        }}
+                                      >
+                                        {data}
+                                      </q>
+                                    </i>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </Box>
-                        )}
-                      </Box>
-                    </Grid>
+                        );
+                      })}
                   </Grid>
-                </>
-              ) : (
-                <Box
-                  sx={{
-                    fontSize: "2rem",
-                    fontWeight: "bold",
-                    color: "red",
-                    textAlign: "center",
-                    fontFamily: '"Nunito",sans-serif',
-                  }}
-                >
-                  No word details found for {slug}!
-                </Box>
-              )}
-            </>
-          )}
+                  <Grid item xs={12} md={3}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        marginTop: "20px",
+                        backgroundColor: "#d1d1d1",
+                        borderRadius: "22px",
+                        padding: "10px 30px 30px 30px",
+                        minHeight: "200px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          textAlign: "center",
+                          paddingBottom: "10px",
+                          "& .wordTxt": {
+                            fontSize: "40px",
+                            fontWeight: "900",
+                            fontFamily: '"Nunito",sans-serif',
+                            textTransform: "capitalize",
+                            color: "orange",
+                          },
+                        }}
+                      >
+                        <p className="wordTxt">Rhymes</p>
+                      </Box>
+                      {!!wordApiData.length &&
+                      wordApiData?.[0]?.rhymes === "" ? null : (
+                        <Box
+                          sx={{
+                            "& .theWord": {
+                              fontWeight: 500,
+                              fontFamily: '"Nunito",sans-serif',
+                              width: "100%",
+                              fontSize: "16px",
+                              padding: "5px 7px 5px 11px",
+                              marginBottom: "10px",
+                              transition: ".3s ease",
+                              cursor: "pointer",
+                              borderRadius: "75px",
+                              backgroundColor: "rgba(255,255,255,1)",
+                              color: "black",
+                              display: "flex",
+                              alignItems: "center",
+                              "&:hover": {
+                                backgroundColor: "rgba(180,180,180,1)",
+                              },
+                            },
+                          }}
+                        >
+                          {wordApiData[0]?.rhymes?.map((data, index) => (
+                            <p
+                              key={index}
+                              onClick={() => router.push(`${data}`)}
+                              className="theWord"
+                            >
+                              <SearchIcon
+                                sx={{
+                                  fontSize: "16px",
+                                  marginRight: "10px",
+                                }}
+                              />
+                              {data}
+                            </p>
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <Box
+                sx={{
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                  color: "red",
+                  textAlign: "center",
+                  fontFamily: '"Nunito",sans-serif',
+                }}
+              >
+                {`No word details found for ${slug}!`}
+              </Box>
+            )}
+          </>
         </Container>
       </Box>
       <Toaster

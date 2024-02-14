@@ -2,6 +2,7 @@ import DictionarySlug from "@/components/dictionary/DictionarySlug";
 import Head from "next/head";
 
 function DetailPage({ wordData, slug, loading }) {
+  console.log(wordData);
   return (
     <>
       <Head>
@@ -11,7 +12,7 @@ function DetailPage({ wordData, slug, loading }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <DictionarySlug wordData={wordData} slug={slug} loading={loading} />
+        <DictionarySlug wordApiData={wordData} slug={slug} loading={loading} />
       </main>
     </>
   );
@@ -24,13 +25,15 @@ export async function getServerSideProps(context) {
   const { slug } = params;
   let loading = true;
   // Fetch data from the server
-  const res = await fetch(`https://api.stackaxiom.com/api/search`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ word: slug }),
-  });
+  const res = await fetch(
+    `https://api.stackaxiom.com/api/search?word=${slug}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   const data = await res.json();
   loading = false;
