@@ -26,14 +26,14 @@ export async function getServerSideProps({ query }) {
   const { wordToTranslate } = query;
 
   const resSearch = await axios.get(
-    `https://api.stackaxiom.com/api/search?word=${
+    `https://api.browseword.com/api/search?word=${
       wordToTranslate?.split("-meaning-in-")[0]
     }`
   );
 
   let englishData = resSearch?.data || null;
   const resDetails = await axios.get(
-    `https://api.stackaxiom.com/api/en/${
+    `https://api.browseword.com/api/en/${
       wordToTranslate?.split("-meaning-in-")[1] === "urdu"
         ? "english-to-urdu"
         : wordToTranslate?.split("-meaning-in-")[1] === "punjabi"

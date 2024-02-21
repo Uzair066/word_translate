@@ -34,7 +34,7 @@ function Home({ posts }) {
   //   fetchAllPopularWords();
   // }, []);
   // const fetchAllPopularWords = async () => {
-  //   const res = await fetch("https://api.stackaxiom.com/api/top30words");
+  //   const res = await fetch("https://api.browseword.com/api/top30words");
   //   const posts = await res.json();
   //   setPopular(!!posts?.length ? posts : []);
   // };

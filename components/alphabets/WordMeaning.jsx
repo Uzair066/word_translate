@@ -27,7 +27,7 @@ function WordMeaning() {
   const getAlphabeticalData = async () => {
     await axios
       .get(
-        `https://api.stackaxiom.com/api/alphabets/${pageNumber}?startWith=${startWith}`
+        `https://api.browseword.com/api/alphabets/${pageNumber}?startWith=${startWith}`
       )
       .then((res) => setApiData(res?.data))
       .catch((err) => console.log(err));

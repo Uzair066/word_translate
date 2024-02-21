@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
   let loading = true;
   // Fetch data from the server
   const res = await fetch(
-    `https://api.stackaxiom.com/api/search?word=${slug}`,
+    `https://api.browseword.com/api/search?word=${slug}`,
     {
       method: "GET",
       headers: {
