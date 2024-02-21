@@ -3,19 +3,19 @@ import axios from "axios";
 import Head from "next/head";
 
 function DetailPageTranslation({ engData, wordData, wordToTranslate }) {
+  console.log(wordData);
   return (
     <>
       <Head>
         <title>Create Next App</title>
-        <meta name="robots" content="noindex" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         <WordTranslate
           wordToTranslate={wordToTranslate}
-          engData={engData}
-          wordData={wordData}
+          englishData={engData}
+          wordApiData={wordData}
         />
       </main>
     </>
@@ -25,15 +25,14 @@ function DetailPageTranslation({ engData, wordData, wordToTranslate }) {
 export async function getServerSideProps({ query }) {
   const { wordToTranslate } = query;
 
-  // let inputWord = wordToTranslate?.split("-meaning-in-")[0];
-
-  const resSearch = await axios.post(`https://api.stackaxiom.com/api/search`, {
-    word: wordToTranslate?.split("-meaning-in-")[0],
-  });
+  const resSearch = await axios.get(
+    `https://api.stackaxiom.com/api/search?word=${
+      wordToTranslate?.split("-meaning-in-")[0]
+    }`
+  );
 
   let englishData = resSearch?.data || null;
-
-  const resDetails = await axios.post(
+  const resDetails = await axios.get(
     `https://api.stackaxiom.com/api/en/${
       wordToTranslate?.split("-meaning-in-")[1] === "urdu"
         ? "english-to-urdu"
@@ -56,10 +55,7 @@ export async function getServerSideProps({ query }) {
         : wordToTranslate?.split("-meaning-in-")[1] === "gujarati"
         ? "english-to-gujarati"
         : null
-    }`,
-    {
-      word: wordToTranslate?.split("-meaning-in-")[0],
-    }
+    }?word=${wordToTranslate?.split("-meaning-in-")[0]}`
   );
 
   let wordApiData = resDetails?.data || null;

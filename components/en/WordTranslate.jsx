@@ -7,18 +7,16 @@ import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { Message_data } from "../../context/context";
 import { useContext } from "react";
+import Loader from "../Loader";
 
-function WordTranslate({ engData, wordData, wordToTranslate }) {
+function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
   const { theme } = useContext(Message_data);
   const router = useRouter();
-  // const { wordToTranslate } = router.query;
-  const [wordApiData, setWordApiData] = useState([]);
   const [inputWord, setInputWord] = useState(
     wordToTranslate?.split("-meaning-in-")[0]
   );
   const [validated, setValidated] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [englishData, setEnglishData] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,83 +60,8 @@ function WordTranslate({ engData, wordData, wordToTranslate }) {
   useEffect(() => {
     setInputWord(wordToTranslate?.split("-meaning-in-")[0]);
     count++;
-    // if (!!wordToTranslate && count === 1) {
-    setWordApiData(wordData);
-    setEnglishData(engData);
-    // }
-  }, [wordToTranslate, wordData]);
+  }, [wordToTranslate, wordApiData]);
 
-  // const getWordDetails = async () => {
-  //   setLoading(true);
-  //   toast.promise(
-  //     axios.post(
-  //       `https://api.stackaxiom.com/api/en/${
-  //         wordToTranslate?.split("-meaning-in-")[1] === "urdu"
-  //           ? "english-to-urdu"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "punjabi"
-  //           ? "english-to-punjabi"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "hindi"
-  //           ? "english-to-hindi"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "tamil"
-  //           ? "english-to-tamil"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "telugu"
-  //           ? "english-to-telugu"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "bengali"
-  //           ? "english-to-bengali"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "kannada"
-  //           ? "english-to-kannada"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "marathi"
-  //           ? "english-to-marathi"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "malayalam"
-  //           ? "english-to-malayalam"
-  //           : wordToTranslate?.split("-meaning-in-")[1] === "gujarati"
-  //           ? "english-to-gujarati"
-  //           : null
-  //       }`,
-  //       {
-  //         word: wordToTranslate?.split("-meaning-in-")[0],
-  //       }
-  //     ),
-  //     {
-  //       loading: () => {
-  //         return `Getting details of ${
-  //           wordToTranslate?.split("-meaning-in-")[0]
-  //         }!`;
-  //       },
-  //       success: (res) => {
-  //         if (res && res.data) {
-  //           setWordApiData(res.data);
-  //           setLoading(false);
-  //           count = 0;
-  //           return "Details fetched successfully!";
-  //         } else {
-  //           // Handle the case where res.data is undefined or null
-  //           return "Invalid response data";
-  //         }
-  //       },
-  //       error: (err) => {
-  //         console.error("API Error:", err);
-  //         if (err?.response?.data?.message) {
-  //           // Handle the error message from the server
-  //           toast.error(err.response.data.message);
-  //         } else {
-  //           // Handle other types of errors
-  //           toast.error("An error occurred");
-  //         }
-  //         setWordApiData([]);
-  //         setLoading(false);
-  //         count = 0;
-  //         return err?.response?.data?.message || "An error occurred";
-  //       },
-  //     }
-  //   );
-  //   axios
-  //     .post(`https://api.stackaxiom.com/api/search`, {
-  //       word: wordToTranslate?.split("-meaning-in-")[0],
-  //     })
-  //     .then((res) => setEnglishData(res?.data))
-  //     .catch((err) => console.log(err));
-  // };
   return (
     <Container maxWidth="lg" sx={{ paddingBottom: "90px" }}>
       <Box
@@ -218,457 +141,204 @@ function WordTranslate({ engData, wordData, wordToTranslate }) {
         }}
       >
         <Container maxWidth="lg">
-          {loading ? null : (
-            <>
-              {!!wordApiData.length ? (
-                <>
-                  <Box
-                    sx={{
-                      "& .wordTxt": {
-                        fontSize: "50px",
-                        color: "orange",
-                        fontWeight: "700",
-                        fontFamily: '"Nunito",sans-serif',
-                        textTransform: "capitalize",
-                        textAlign: "center",
-                      },
-                      "& span": {
-                        fontSize: "50px",
-                        color:
-                          theme === "dark"
-                            ? "#fff !important"
-                            : "#303030 !important",
-                        fontWeight: "500",
-                        fontFamily: '"Nunito",sans-serif',
-                        textTransform: "capitalize",
-                      },
-                    }}
-                  >
-                    <p className="wordTxt">
-                      {wordToTranslate?.split("-meaning-in-")[0]}{" "}
-                      <span>Meaning in</span>{" "}
-                      {wordToTranslate?.split("-meaning-in-")[1]}
-                    </p>
-                  </Box>
-                  <Box
-                    sx={{
-                      "& .wordTxt": {
-                        fontSize: "20px",
-                        color: "orange",
-                        fontWeight: "500",
-                        fontFamily: '"Nunito",sans-serif',
-                        textTransform: "capitalize",
-                        textAlign: "center",
-                      },
-                    }}
-                  >
-                    <p className="wordTxt">
-                      {wordToTranslate?.split("-meaning-in-")[1] ===
-                        "kannada" &&
-                        `ಇದರ ನಿಜವಾದ ಅರ್ಥವನ್ನು ತಿಳಿಯಿರಿ ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } ಸರಳ ಉದಾಹರಣೆಗಳು ಮತ್ತು ವ್ಯಾಖ್ಯಾನಗಳೊಂದಿಗೆ`}
-                      {wordToTranslate?.split("-meaning-in-")[1] === "hindi" &&
-                        `जानें इसका सही मतलब ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } सरल उदाहरणों और परिभाषाओं के साथ`}
-                      {wordToTranslate?.split("-meaning-in-")[1] === "tamil" &&
-                        `என்பதன் உண்மையான அர்த்தத்தை அறிக ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } எளிய எடுத்துக்காட்டுகள் மற்றும் வரையறைகளுடன்`}
-                      {wordToTranslate?.split("-meaning-in-")[1] === "telugu" &&
-                        `యొక్క నిజమైన అర్థం తెలుసుకోండి ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } సాధారణ ఉదాహరణలు మరియు నిర్వచనాలతో`}
-                      {wordToTranslate?.split("-meaning-in-")[1] ===
-                        "bengali" &&
-                        `এর প্রকৃত অর্থ জানুন ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } সহজ উদাহরণ এবং সংজ্ঞা সহ`}
-                      {wordToTranslate?.split("-meaning-in-")[1] ===
-                        "marathi" &&
-                        `चा खरा अर्थ जाणून घ्या ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } साधी उदाहरणे आणि व्याख्या सह`}
-                      {wordToTranslate?.split("-meaning-in-")[1] ===
-                        "malayalam" &&
-                        `എന്നതിൻ്റെ യഥാർത്ഥ അർത്ഥം മനസ്സിലാക്കുക ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } ലളിതമായ ഉദാഹരണങ്ങളും നിർവചനങ്ങളും സഹിതം`}
-                      {wordToTranslate?.split("-meaning-in-")[1] ===
-                        "gujrati" &&
-                        `નો સાચો અર્થ જાણો ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } સરળ ઉદાહરણો અને વ્યાખ્યાઓ સાથે`}
-                      {wordToTranslate?.split("-meaning-in-")[1] ===
-                        "punjabi" &&
-                        `ਦਾ ਸਹੀ ਅਰਥ ਜਾਣੋ ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } ਸਧਾਰਨ ਉਦਾਹਰਣਾਂ ਅਤੇ ਪਰਿਭਾਸ਼ਾਵਾਂ ਦੇ ਨਾਲ`}
-                      {wordToTranslate?.split("-meaning-in-")[1] === "urdu" &&
-                        `کے حقیقی معنی جانیں۔ ${
-                          wordToTranslate?.split("-meaning-in-")[0]
-                        } سادہ مثالوں اور تعریفوں کے ساتھ`}
-                    </p>
-                  </Box>
-                  <Box
-                    sx={{
-                      "& .wordTxt": {
-                        fontSize: "56px",
-                        color: "orange",
-                        fontWeight: "900",
-                        fontFamily: '"Nunito",sans-serif',
-                        textTransform: "capitalize",
-                      },
-                      "& span": {
-                        fontSize: "x-large",
-                        color:
-                          theme === "dark"
-                            ? "#fff !important"
-                            : "#303030 !important",
-                        fontWeight: "700",
-                        fontFamily: '"Nunito",sans-serif',
-                        textTransform: "capitalize",
-                      },
-                    }}
-                  >
-                    <p className="wordTxt">
-                      {wordApiData?.[0]?.word_translated}
-                    </p>
-                    <span>{wordToTranslate?.split("-meaning-in-")[0]}</span>
-                  </Box>
-                  <Grid container spacing={4}>
-                    <Grid item xs={12} md={9}>
-                      {!!wordApiData.length &&
-                        wordApiData?.map((item, index) => (
-                          <Box
-                            key={index}
-                            sx={{
-                              marginTop: "20px",
-                              backgroundColor: "#d1d1d1",
-                              borderRadius: "22px",
-                              padding: "34px 34px 34px 34px",
-                              minHeight: "200px",
-                              "& p": {
-                                fontFamily: '"Nunito",sans-serif',
-                              },
-                            }}
-                          >
-                            <p>
-                              <b>
-                                Definition of{" "}
-                                {wordToTranslate?.split("-meaning-in-")[0]}:{" "}
-                              </b>
-                            </p>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                marginBottom: "8px",
-                                flexWrap: "wrap",
-                                flexDirection: "column",
-                                "& p": {
-                                  marginBottom: "0px",
-                                },
-                              }}
-                            >
-                              <p>
-                                {item?.definition
-                                  ?.replace(/^"|"$/g, "")
-                                  .replace(/\\\"/g, '"')}
-                              </p>
-                              <p
-                                style={{
-                                  fontSize: "small",
-                                  color: "#716f6f",
-                                }}
-                              >
-                                {englishData?.[index]?.definition}
-                              </p>
-                            </Box>
-                            {item?.synonyms !== '"\\"\\""' && (
-                              <p>
-                                <b>
-                                  Synonyms of{" "}
-                                  {wordToTranslate?.split("-meaning-in-")[0]}:{" "}
-                                </b>
-                              </p>
-                            )}
-
-                            {item?.synonyms === '"\\"\\""' ? null : (
-                              <Box
-                                sx={{
-                                  width: "100%",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: 1,
-                                  flexWrap: "wrap",
-                                  paddingBottom: "5px",
-                                  "& .textToClick": {
-                                    background: "white",
-                                    padding: "0.5rem",
-                                    borderRadius: "0.25rem",
-                                    textTransform: "capitalize",
-                                    cursor: "pointer",
-                                    "&:hover": {
-                                      backgroundColor: "rgba(180,180,180,1)",
-                                    },
-                                  },
-                                }}
-                              >
-                                {item?.synonyms
-                                  ?.replace(/^"|"$/g, "")
-                                  .replace(/\\\"/g, '"')
-                                  ?.split("!#!")
-                                  ?.join("! #!")
-                                  ?.split("! #!")
-                                  ?.join("!# !")
-                                  .split("!# !")
-                                  ?.map((data, i) => (
-                                    <Box
-                                      key={i}
-                                      className="textToClick"
-                                      onClick={() =>
-                                        router.push(
-                                          `/en/${
-                                            JSON.parse(
-                                              englishData?.[index]?.synonyms
-                                                ?.replace(/^"|"$/g, "")
-                                                .replace(/\\\"/g, '"')
-                                            )?.[i]
-                                          }-meaning-in-${
-                                            wordToTranslate?.split(
-                                              "-meaning-in-"
-                                            )[1]
-                                          }`
-                                        )
-                                      }
-                                    >
-                                      <p>{data}</p>
-                                      <p
-                                        style={{
-                                          fontSize: "small",
-                                          color: "#716f6f",
-                                        }}
-                                      >
-                                        {englishData?.[index]?.synonyms !==
-                                          '""' &&
-                                          JSON.parse(
-                                            englishData?.[index]?.synonyms
-                                              ?.replace(/^"|"$/g, "")
-                                              .replace(/\\\"/g, '"')
-                                          )?.[i]}
-                                      </p>
-                                    </Box>
-                                  ))}
-                              </Box>
-                            )}
-                            {item?.has_parts !== '"\\"\\""' && (
-                              <>
-                                <p>
-                                  <b>Has Parts: </b>
-                                </p>
-                                <Box sx={{ marginBottom: "8px" }}>
-                                  <p>
-                                    {item?.has_parts === '"\\"\\""'
-                                      ? null
-                                      : item?.has_parts
-                                          ?.replace(/^"|"$/g, "")
-                                          .replace(/\\\"/g, '"')
-                                          ?.split("!#!")
-                                          ?.join("! #!")
-                                          ?.split("! #!")
-                                          ?.join("!# !")
-                                          .split("!# !")
-                                          ?.toString()}
-                                  </p>
-                                  <p
-                                    style={{
-                                      fontSize: "small",
-                                      color: "#716f6f",
-                                    }}
-                                  >
-                                    {englishData?.[index]?.has_parts === '""'
-                                      ? null
-                                      : JSON.parse(
-                                          englishData?.[index]?.has_parts
-                                            ?.replace(/^"|"$/g, "")
-                                            .replace(/\\\"/g, '"')
-                                        )?.toString()}
-                                  </p>
-                                </Box>
-                              </>
-                            )}
-                            {item?.is_a_type_of !== '"\\"\\""' && (
-                              <>
-                                <p>
-                                  <b>
-                                    {wordToTranslate?.split("-meaning-in-")[0]}{" "}
-                                    is a Type of:{" "}
-                                  </b>
-                                </p>
-                                <Box sx={{ marginBottom: "8px" }}>
-                                  <p>
-                                    {item?.is_a_type_of === '"\\"\\""'
-                                      ? null
-                                      : item?.is_a_type_of
-                                          ?.replace(/^"|"$/g, "")
-                                          .replace(/\\\"/g, '"')
-                                          ?.split("!#!")
-                                          ?.join("! #!")
-                                          ?.split("! #!")
-                                          ?.join("!# !")
-                                          .split("!# !")
-                                          ?.toString()}
-                                  </p>
-                                  <p
-                                    style={{
-                                      fontSize: "small",
-                                      color: "#716f6f",
-                                    }}
-                                  >
-                                    {englishData?.[index]?.is_a_type_of === '""'
-                                      ? null
-                                      : JSON.parse(
-                                          englishData?.[index]?.is_a_type_of
-                                            ?.replace(/^"|"$/g, "")
-                                            .replace(/\\\"/g, '"')
-                                        )?.toString()}
-                                  </p>
-                                </Box>
-                              </>
-                            )}
-                            {item?.examples !== '"\\"\\""' && (
-                              <p>
-                                <b>
-                                  Examples of{" "}
-                                  {wordToTranslate?.split("-meaning-in-")[0]}:{" "}
-                                </b>
-                              </p>
-                            )}
-
-                            {item?.examples === '"\\"\\""' ? null : (
-                              <ul style={{ paddingLeft: "2rem" }}>
-                                {item?.examples
-                                  ?.replace(/^"|"$/g, "")
-                                  .replace(/\\\"/g, '"')
-                                  ?.split("!#!")
-                                  ?.join("! #!")
-                                  ?.split("! #!")
-                                  ?.join("!# !")
-                                  .split("!# !")
-                                  ?.map((data, i) => (
-                                    <li key={i}>
-                                      <span
-                                        style={{
-                                          width: "100%",
-                                          display: "block",
-                                        }}
-                                      >
-                                        <i>
-                                          <q
-                                            style={{
-                                              fontSize: "16px",
-                                              fontFamily: '"Nunito",sans-serif',
-                                            }}
-                                          >
-                                            {data}
-                                          </q>
-                                        </i>
-                                      </span>
-                                      <span>
-                                        <i>
-                                          <q
-                                            style={{
-                                              fontSize: "small",
-                                              color: "#716f6f",
-                                              fontFamily: '"Nunito",sans-serif',
-                                            }}
-                                          >
-                                            {englishData?.[index]?.examples !==
-                                              '""' &&
-                                              JSON.parse(
-                                                englishData?.[index]?.examples
-                                                  ?.replace(/^"|"$/g, "")
-                                                  .replace(/\\\"/g, '"')
-                                              )?.[i]}
-                                          </q>
-                                        </i>
-                                      </span>
-                                    </li>
-                                  ))}
-                              </ul>
-                            )}
-                          </Box>
-                        ))}
-                    </Grid>
-                    <Grid item xs={12} md={3}>
-                      <Box
-                        sx={{
-                          position: "relative",
-                          marginTop: "20px",
-                          backgroundColor: "#d1d1d1",
-                          borderRadius: "22px",
-                          padding: "10px 30px 30px 30px",
-                          minHeight: "200px",
-                        }}
-                      >
+          {loading && <Loader />}
+          <>
+            {!!wordApiData.length ? (
+              <>
+                <Box
+                  sx={{
+                    "& .wordTxt": {
+                      fontSize: "50px",
+                      color: "orange",
+                      fontWeight: "700",
+                      fontFamily: '"Nunito",sans-serif',
+                      textTransform: "capitalize",
+                      textAlign: "center",
+                    },
+                    "& span": {
+                      fontSize: "50px",
+                      color:
+                        theme === "dark"
+                          ? "#fff !important"
+                          : "#303030 !important",
+                      fontWeight: "500",
+                      fontFamily: '"Nunito",sans-serif',
+                      textTransform: "capitalize",
+                    },
+                  }}
+                >
+                  <p className="wordTxt">
+                    {wordToTranslate?.split("-meaning-in-")[0]}{" "}
+                    <span>Meaning in</span>{" "}
+                    {wordToTranslate?.split("-meaning-in-")[1]}
+                  </p>
+                </Box>
+                <Box
+                  sx={{
+                    "& .wordTxt": {
+                      fontSize: "20px",
+                      color: "orange",
+                      fontWeight: "500",
+                      fontFamily: '"Nunito",sans-serif',
+                      textTransform: "capitalize",
+                      textAlign: "center",
+                    },
+                  }}
+                >
+                  <p className="wordTxt">
+                    {wordToTranslate?.split("-meaning-in-")[1] === "kannada" &&
+                      `ಇದರ ನಿಜವಾದ ಅರ್ಥವನ್ನು ತಿಳಿಯಿರಿ ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } ಸರಳ ಉದಾಹರಣೆಗಳು ಮತ್ತು ವ್ಯಾಖ್ಯಾನಗಳೊಂದಿಗೆ`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "hindi" &&
+                      `जानें इसका सही मतलब ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } सरल उदाहरणों और परिभाषाओं के साथ`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "tamil" &&
+                      `என்பதன் உண்மையான அர்த்தத்தை அறிக ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } எளிய எடுத்துக்காட்டுகள் மற்றும் வரையறைகளுடன்`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "telugu" &&
+                      `యొక్క నిజమైన అర్థం తెలుసుకోండి ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } సాధారణ ఉదాహరణలు మరియు నిర్వచనాలతో`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "bengali" &&
+                      `এর প্রকৃত অর্থ জানুন ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } সহজ উদাহরণ এবং সংজ্ঞা সহ`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "marathi" &&
+                      `चा खरा अर्थ जाणून घ्या ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } साधी उदाहरणे आणि व्याख्या सह`}
+                    {wordToTranslate?.split("-meaning-in-")[1] ===
+                      "malayalam" &&
+                      `എന്നതിൻ്റെ യഥാർത്ഥ അർത്ഥം മനസ്സിലാക്കുക ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } ലളിതമായ ഉദാഹരണങ്ങളും നിർവചനങ്ങളും സഹിതം`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "gujrati" &&
+                      `નો સાચો અર્થ જાણો ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } સરળ ઉદાહરણો અને વ્યાખ્યાઓ સાથે`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "punjabi" &&
+                      `ਦਾ ਸਹੀ ਅਰਥ ਜਾਣੋ ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } ਸਧਾਰਨ ਉਦਾਹਰਣਾਂ ਅਤੇ ਪਰਿਭਾਸ਼ਾਵਾਂ ਦੇ ਨਾਲ`}
+                    {wordToTranslate?.split("-meaning-in-")[1] === "urdu" &&
+                      `کے حقیقی معنی جانیں۔ ${
+                        wordToTranslate?.split("-meaning-in-")[0]
+                      } سادہ مثالوں اور تعریفوں کے ساتھ`}
+                  </p>
+                </Box>
+                <Box
+                  sx={{
+                    "& .wordTxt": {
+                      fontSize: "56px",
+                      color: "orange",
+                      fontWeight: "900",
+                      fontFamily: '"Nunito",sans-serif',
+                      textTransform: "capitalize",
+                    },
+                    "& span": {
+                      fontSize: "x-large",
+                      color:
+                        theme === "dark"
+                          ? "#fff !important"
+                          : "#303030 !important",
+                      fontWeight: "700",
+                      fontFamily: '"Nunito",sans-serif',
+                      textTransform: "capitalize",
+                    },
+                  }}
+                >
+                  <p className="wordTxt">{wordApiData?.[0]?.word_translated}</p>
+                  <span>{wordToTranslate?.split("-meaning-in-")[0]}</span>
+                </Box>
+                <Grid container spacing={4}>
+                  <Grid item xs={12} md={9}>
+                    {!!wordApiData.length &&
+                      wordApiData?.map((item, index) => (
                         <Box
+                          key={index}
                           sx={{
-                            textAlign: "center",
-                            paddingBottom: "10px",
-                            "& .wordTxt": {
-                              fontSize: "40px",
-                              fontWeight: "900",
+                            marginTop: "20px",
+                            backgroundColor: "#d1d1d1",
+                            borderRadius: "22px",
+                            padding: "34px 34px 34px 34px",
+                            minHeight: "200px",
+                            "& p": {
                               fontFamily: '"Nunito",sans-serif',
-                              textTransform: "capitalize",
-                              color: "orange",
                             },
                           }}
                         >
-                          <p className="wordTxt">Rhymes</p>
-                        </Box>
-                        {!!wordApiData.length &&
-                        wordApiData?.[0]?.rhymes === '"\\"\\""' ? null : (
+                          <p>
+                            <b>
+                              {`Definition of ${
+                                wordToTranslate?.split("-meaning-in-")[0]
+                              }: `}
+                            </b>
+                          </p>
                           <Box
                             sx={{
-                              "& .theWord": {
-                                fontWeight: 500,
-                                fontFamily: '"Nunito",sans-serif',
-                                width: "100%",
-                                fontSize: "16px",
-                                padding: "5px 7px 5px 11px",
-                                marginBottom: "10px",
-                                transition: ".3s ease",
-                                borderRadius: "75px",
-                                backgroundColor: "rgba(255,255,255,1)",
-                                color: "black",
-                                display: "flex",
-                                alignItems: "center",
-                                cursor: "pointer",
-                                "&:hover": {
-                                  backgroundColor: "rgba(180,180,180,1)",
-                                },
+                              display: "flex",
+                              marginBottom: "8px",
+                              flexWrap: "wrap",
+                              flexDirection: "column",
+                              "& p": {
+                                marginBottom: "0px",
                               },
                             }}
                           >
-                            {wordApiData[0]?.rhymes
-                              ?.replace(/^"|"$/g, "")
-                              .replace(/\\\"/g, '"')
-                              ?.split("//")
-                              ?.join("/ /")
-                              ?.split("/ /")
-                              ?.map((data, index) => (
-                                <p
-                                  key={index}
-                                  className="theWord"
+                            <p>{item?.definition}</p>
+                            <p
+                              style={{
+                                fontSize: "small",
+                                color: "#716f6f",
+                              }}
+                            >
+                              {englishData?.[index]?.definition}
+                            </p>
+                          </Box>
+                          {item?.synonyms !== "" && (
+                            <p>
+                              <b>
+                                {`Synonyms of ${
+                                  wordToTranslate?.split("-meaning-in-")[0]
+                                }: `}
+                              </b>
+                            </p>
+                          )}
+
+                          {item?.synonyms === "" ? null : (
+                            <Box
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1,
+                                flexWrap: "wrap",
+                                paddingBottom: "5px",
+                                "& .textToClick": {
+                                  background: "white",
+                                  padding: "0.5rem",
+                                  borderRadius: "0.25rem",
+                                  textTransform: "capitalize",
+                                  cursor: "pointer",
+                                  "&:hover": {
+                                    backgroundColor: "rgba(180,180,180,1)",
+                                  },
+                                },
+                              }}
+                            >
+                              {item?.synonyms?.map((data, i) => (
+                                <Box
+                                  key={i}
+                                  className="textToClick"
                                   onClick={() =>
                                     router.push(
                                       `/en/${
                                         JSON.parse(
-                                          englishData?.[0]?.rhymes
-                                            ?.replace(/^"|"$/g, "")
-                                            .replace(/\\\"/g, '"')
-                                        )?.[index]
+                                          englishData?.[index]?.synonyms
+                                        )?.[i]
                                       }-meaning-in-${
                                         wordToTranslate?.split(
                                           "-meaning-in-"
@@ -677,44 +347,227 @@ function WordTranslate({ engData, wordData, wordToTranslate }) {
                                     )
                                   }
                                 >
-                                  <SearchIcon
-                                    sx={{
-                                      fontSize: "16px",
-                                      marginRight: "10px",
+                                  <p>{data}</p>
+                                  <p
+                                    style={{
+                                      fontSize: "small",
+                                      color: "#716f6f",
                                     }}
-                                  />
-                                  {data}
-                                  <br />
-                                  {englishData?.[0]?.rhymes !== '""' &&
-                                    JSON.parse(
-                                      englishData?.[0]?.rhymes
-                                        ?.replace(/^"|"$/g, "")
-                                        .replace(/\\\"/g, '"')
-                                    )?.[index]}
-                                </p>
+                                  >
+                                    {englishData?.[index]?.synonyms !== "" &&
+                                      englishData?.[index]?.synonyms?.[i]}
+                                  </p>
+                                </Box>
                               ))}
-                          </Box>
-                        )}
-                      </Box>
-                    </Grid>
+                            </Box>
+                          )}
+                          {item?.has_parts !== "" && (
+                            <>
+                              <p>
+                                <b>Has Parts: </b>
+                              </p>
+                              <Box sx={{ marginBottom: "8px" }}>
+                                <p>
+                                  {item?.has_parts === ""
+                                    ? null
+                                    : item?.has_parts?.toString()}
+                                </p>
+                                <p
+                                  style={{
+                                    fontSize: "small",
+                                    color: "#716f6f",
+                                  }}
+                                >
+                                  {englishData?.[index]?.has_parts === ""
+                                    ? null
+                                    : englishData?.[
+                                        index
+                                      ]?.has_parts?.toString()}
+                                </p>
+                              </Box>
+                            </>
+                          )}
+                          {item?.is_a_type_of !== "" && (
+                            <>
+                              <p>
+                                <b>
+                                  {`${
+                                    wordToTranslate?.split("-meaning-in-")[0]
+                                  } is a Type of: `}
+                                </b>
+                              </p>
+                              <Box sx={{ marginBottom: "8px" }}>
+                                <p>
+                                  {item?.is_a_type_of === ""
+                                    ? null
+                                    : item?.is_a_type_of?.toString()}
+                                </p>
+                                <p
+                                  style={{
+                                    fontSize: "small",
+                                    color: "#716f6f",
+                                  }}
+                                >
+                                  {englishData?.[index]?.is_a_type_of === ""
+                                    ? null
+                                    : englishData?.[
+                                        index
+                                      ]?.is_a_type_of?.toString()}
+                                </p>
+                              </Box>
+                            </>
+                          )}
+                          {item?.examples !== "" && (
+                            <p>
+                              <b>
+                                {`Examples of ${
+                                  wordToTranslate?.split("-meaning-in-")[0]
+                                }: `}
+                              </b>
+                            </p>
+                          )}
+
+                          {item?.examples === "" ? null : (
+                            <ul style={{ paddingLeft: "2rem" }}>
+                              {item?.examples?.map((data, i) => (
+                                <li key={i}>
+                                  <span
+                                    style={{
+                                      width: "100%",
+                                      display: "block",
+                                    }}
+                                  >
+                                    <i>
+                                      <q
+                                        style={{
+                                          fontSize: "16px",
+                                          fontFamily: '"Nunito",sans-serif',
+                                        }}
+                                      >
+                                        {data}
+                                      </q>
+                                    </i>
+                                  </span>
+                                  <span>
+                                    <i>
+                                      <q
+                                        style={{
+                                          fontSize: "small",
+                                          color: "#716f6f",
+                                          fontFamily: '"Nunito",sans-serif',
+                                        }}
+                                      >
+                                        {englishData?.[index]?.examples !==
+                                          "" &&
+                                          englishData?.[index]?.examples?.[i]}
+                                      </q>
+                                    </i>
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </Box>
+                      ))}
                   </Grid>
-                </>
-              ) : (
-                <Box
-                  sx={{
-                    fontSize: "2rem",
-                    fontWeight: "bold",
-                    color: "red",
-                    textAlign: "center",
-                    fontFamily: '"Nunito",sans-serif',
-                  }}
-                >
-                  No word details found for{" "}
-                  {wordToTranslate?.split("-meaning-in-")[0]}!
-                </Box>
-              )}
-            </>
-          )}
+                  <Grid item xs={12} md={3}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        marginTop: "20px",
+                        backgroundColor: "#d1d1d1",
+                        borderRadius: "22px",
+                        padding: "10px 30px 30px 30px",
+                        minHeight: "200px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          textAlign: "center",
+                          paddingBottom: "10px",
+                          "& .wordTxt": {
+                            fontSize: "40px",
+                            fontWeight: "900",
+                            fontFamily: '"Nunito",sans-serif',
+                            textTransform: "capitalize",
+                            color: "orange",
+                          },
+                        }}
+                      >
+                        <p className="wordTxt">Rhymes</p>
+                      </Box>
+                      {!!wordApiData.length &&
+                      wordApiData?.[0]?.rhymes === "" ? null : (
+                        <Box
+                          sx={{
+                            "& .theWord": {
+                              fontWeight: 500,
+                              fontFamily: '"Nunito",sans-serif',
+                              width: "100%",
+                              fontSize: "16px",
+                              padding: "5px 7px 5px 11px",
+                              marginBottom: "10px",
+                              transition: ".3s ease",
+                              borderRadius: "75px",
+                              backgroundColor: "rgba(255,255,255,1)",
+                              color: "black",
+                              display: "flex",
+                              alignItems: "center",
+                              cursor: "pointer",
+                              "&:hover": {
+                                backgroundColor: "rgba(180,180,180,1)",
+                              },
+                            },
+                          }}
+                        >
+                          {wordApiData[0]?.rhymes?.map((data, index) => (
+                            <p
+                              key={index}
+                              className="theWord"
+                              onClick={() =>
+                                router.push(
+                                  `/en/${
+                                    englishData?.[0]?.rhymes?.[index]
+                                  }-meaning-in-${
+                                    wordToTranslate?.split("-meaning-in-")[1]
+                                  }`
+                                )
+                              }
+                            >
+                              <SearchIcon
+                                sx={{
+                                  fontSize: "16px",
+                                  marginRight: "10px",
+                                }}
+                              />
+                              {data}
+                              <br />
+                              {englishData?.[0]?.rhymes !== "" &&
+                                englishData?.[0]?.rhymes?.[index]}
+                            </p>
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <Box
+                sx={{
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                  color: "red",
+                  textAlign: "center",
+                  fontFamily: '"Nunito",sans-serif',
+                }}
+              >
+                {`No word details found for ${
+                  wordToTranslate?.split("-meaning-in-")[0]
+                }!`}
+              </Box>
+            )}
+          </>
         </Container>
       </Box>
       <Toaster
