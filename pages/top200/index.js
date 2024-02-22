@@ -1,7 +1,7 @@
 import Head from "next/head";
-import HomeMain from "@/components/Home";
+import Top200 from "@/components/top200/top200";
 
-export default function Home({ posts }) {
+export default function TopWords({ posts }) {
   return (
     <>
       <Head>
@@ -10,13 +10,13 @@ export default function Home({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <HomeMain posts={posts} />
+        <Top200 top200={posts} />
       </main>
     </>
   );
 }
 export const getServerSideProps = async () => {
-  const res = await fetch("https://api.browseword.com/api/top30words?limit=28");
+  const res = await fetch("https://api.browseword.com/api/top30words?limit=200");
   const posts = await res.json();
   return {
     props: {

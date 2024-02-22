@@ -1,11 +1,14 @@
 import { Box, Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/router";
 import Pagination from "@mui/material/Pagination";
+import { Message_data } from "@/context/context";
 
 function StartAlphabet({ apiData }) {
   const router = useRouter();
+  const { isPageLoaded, setIsPageLoaded } = useContext(Message_data);
+
   const { slug, pageNumber, startWith } = router.query;
   const [page, setpage] = useState(1);
   useEffect(() => {
@@ -62,7 +65,7 @@ function StartAlphabet({ apiData }) {
       >
         <span className="wordTxt">Word</span>
         <span className="ofTxt">Start with</span>
-        <span className="theTxt">{startWith}</span>
+        <span className="theTxt">{startWith || "A"}</span>
       </Box>
       <Grid container spacing={2} sx={{ marginTop: "0.5rem" }}>
         {!!apiData?.data?.length &&
@@ -89,6 +92,8 @@ function StartAlphabet({ apiData }) {
                 }}
                 onClick={() => {
                   if (slug !== undefined) {
+                    setIsPageLoaded(false)
+                    setTimeout(() => {
                     router.push(
                       `/en/${item?.word}-${
                         slug === "english-to-urdu"
@@ -113,9 +118,13 @@ function StartAlphabet({ apiData }) {
                           ? "meaning-in-gujarati"
                           : null
                       }`
-                    );
+                    );     
+                  }, 1000)
                   } else {
+                    setIsPageLoaded(false)
+                    setTimeout(() => {
                     router.push(`/dictionary/${item?.word}`);
+                  }, 1000)
                   }
                 }}
               >

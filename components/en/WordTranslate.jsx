@@ -336,9 +336,8 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                   onClick={() =>
                                     router.push(
                                       `/en/${
-                                        JSON.parse(
                                           englishData?.[index]?.synonyms
-                                        )?.[i]
+                                        ?.[i]
                                       }-meaning-in-${
                                         wordToTranslate?.split(
                                           "-meaning-in-"

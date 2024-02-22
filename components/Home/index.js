@@ -11,15 +11,18 @@ import { useContext } from "react";
 
 function Home({ posts }) {
   const router = useRouter();
+  const { theme, isPageLoaded,   setIsPageLoaded } = useContext(Message_data);
 
-  const { theme } = useContext(Message_data);
   // const [popular, setPopular] = useState([posts]);
   const [inputWord, setInputWord] = useState("");
   const [validated, setValidated] = useState(true);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
-      router.push(`dictionary/${inputWord}`);
+      setIsPageLoaded(false)
+      setTimeout(() => {
+        router.push(`dictionary/${inputWord}`);
+      }, 1000);
     }
   };
   const validateVendorForm = () => {
@@ -30,14 +33,7 @@ function Home({ posts }) {
     setValidated(true);
     return true;
   };
-  // useEffect(() => {
-  //   fetchAllPopularWords();
-  // }, []);
-  // const fetchAllPopularWords = async () => {
-  //   const res = await fetch("https://api.browseword.com/api/top30words");
-  //   const posts = await res.json();
-  //   setPopular(!!posts?.length ? posts : []);
-  // };
+ 
   return (
     <Box>
       <Container maxWidth={"lg"}>

@@ -5,6 +5,7 @@ export const Message_data = createContext(null);
 function Context({ children }) {
   const [theme, setTheme] = useState("light");
   const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   useEffect(() => {
     getTheme();
@@ -23,7 +24,8 @@ function Context({ children }) {
 
   return (
     <Message_data.Provider
-      value={{ theme, setTheme, setSelectedLanguage, selectedLanguage }}
+      value={{ theme, setTheme, setSelectedLanguage, selectedLanguage, setIsPageLoaded,
+        isPageLoaded}}
     >
       {children}
     </Message_data.Provider>

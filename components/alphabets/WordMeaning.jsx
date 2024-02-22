@@ -9,6 +9,7 @@ import { Message_data } from "../../context/context";
 import { useContext } from "react";
 import Alphabets from "@/components/Home/alphabets";
 import StartAlphabet from "@/components/StartAlphabet";
+import { Message_data } from "@/context/context";
 
 function WordMeaning() {
   const { theme } = useContext(Message_data);
@@ -17,6 +18,7 @@ function WordMeaning() {
   const [inputWord, setInputWord] = useState("");
   const [validated, setValidated] = useState(true);
   const [apiData, setApiData] = useState(null);
+  const { isPageLoaded,   setIsPageLoaded } = useContext(Message_data);
 
   useEffect(() => {
     if (!!startWith && !!pageNumber) {
@@ -36,7 +38,10 @@ function WordMeaning() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
-      router.push(`/dictionary/${inputWord}`);
+      setIsPageLoaded(false)
+      // setTimeout(() => {
+      //   router.push(`/dictionary/${inputWord}`);
+      // }, 1000);
     }
   };
   const validateVendorForm = () => {

@@ -12,16 +12,15 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-
-const pages = ["Home", "About Us", "Blog"];
 import { Message_data } from "../../context/context";
+const pages = ["Home", "About Us", "Blog"];
 import { useContext } from "react";
 import { Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 
 export const HeaderMain = ({ setMode }) => {
   const router = useRouter();
-  const { theme, setTheme } = useContext(Message_data);
+  const { theme, setTheme, setIsPageLoaded } = useContext(Message_data);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -122,6 +121,17 @@ export const HeaderMain = ({ setMode }) => {
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem
+                    onClick={() => {
+                      handleCloseNavMenu();
+                      setIsPageLoaded(false)
+                      setTimeout(() => {
+                        router.push("/top200");
+                      }, 1000);
+                    }}
+                  >
+                    <Typography textAlign="center">Top 200</Typography>
+                  </MenuItem>
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -177,6 +187,31 @@ export const HeaderMain = ({ setMode }) => {
                   {page}
                 </Button>
               ))}
+                <Button
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    setIsPageLoaded(false)
+                    setTimeout(() => {
+                      router.push("/top200");
+                    }, 1000);
+                  }}
+                  sx={{
+                    // my: 2,
+                    display: "block",
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    color: "orange",
+                    whiteSpace: "nowrap",
+                    transition: "0.3s",
+                    textTransform: "none",
+                    fontFamily: '"Nunito", sans-serif',
+                    "&:hover": {
+                      color: "orange",
+                    },
+                  }}
+                >
+                  Top 200
+                </Button>
             </Box>
             {theme === "light" ? (
               <Tooltip title="Dark Mode" placement="left">

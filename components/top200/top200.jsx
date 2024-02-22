@@ -4,13 +4,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Message_data } from "../../context/context";
 import { useContext } from "react";
 
-function PopularWords({ popular }) {
+function Top200({ top200 }) {
   const { setIsPageLoaded } = useContext(Message_data);
 
   return (
     <Box
       sx={{
-        marginTop: "63px",
+        marginTop: "130px",
         position: "relative",
         backgroundColor: "#d1d1d1",
         borderRadius: "22px",
@@ -55,14 +55,14 @@ function PopularWords({ popular }) {
           },
         }}
       >
-        <span className="wordTxt">POPULAR</span>
+        <span className="wordTxt">TOP 200</span>
         <span className="theTxt">words</span>
       </Box>
       <Grid container spacing={2} sx={{ marginTop: "0.5rem" }}>
-        {!!popular.length &&
-          popular.map((item, index) => (
+        {!!top200.length &&
+          top200.map((item, index) => (
             <Grid key={index} item xs={12} md={6} lg={3} xl={3}>
-              <a href={`/en/${item?.word}-meaning-in-hindi`} onClick={() => setIsPageLoaded(false)}>
+               <a href={`/en/${item?.word}-meaning-in-hindi`} onClick={() => setIsPageLoaded(false)}>
               <Box
                 sx={{
                   borderRadius: "0.25rem",
@@ -95,4 +95,4 @@ function PopularWords({ popular }) {
   );
 }
 
-export default PopularWords;
+export default Top200;

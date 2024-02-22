@@ -89,3 +89,30 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.loaderBackground {
+  background-color: black;
+}
+.loaderBar {
+  animation: loader_bar 1s ease;
+  background-color: #000;
+}
+@keyframes loader_bar {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #000;
+  }
+}
+.loaderBarUnload {
+  animation: loader_bar_unload 0.5s ease;
+  background-color: transparent;
+}
+@keyframes loader_bar_unload {
+  0% {
+    background-color: #000;
+  }
+  100% {
+    background-color: transparent;
+  }
+}

@@ -11,7 +11,7 @@ import { useContext } from "react";
 import Loader from "../Loader";
 
 function DictionarySlug({ wordApiData, slug }) {
-  const { theme } = useContext(Message_data);
+  const { theme, setIsPageLoaded } = useContext(Message_data);
   const router = useRouter();
   console.log(wordApiData);
 
@@ -24,7 +24,12 @@ function DictionarySlug({ wordApiData, slug }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
-      router.push(`${inputWord}`);
+      if (slug.toLowerCase() != inputWord.toLowerCase()) {
+        setIsPageLoaded(false);
+        setTimeout(() => {
+          router.push(`${inputWord}`);
+        }, 1000);
+      }
     }
   };
   const validateVendorForm = () => {
@@ -302,7 +307,16 @@ function DictionarySlug({ wordApiData, slug }) {
                           {wordApiData[0]?.rhymes?.map((data, index) => (
                             <p
                               key={index}
-                              onClick={() => router.push(`${data}`)}
+                              onClick={() => {
+                                if (
+                                  slug.toLowerCase() != data.toLowerCase()
+                                ) {
+                                  setIsPageLoaded(false);
+                                  setTimeout(() => {
+                                    router.push(`${data}`);
+                                  }, 1000);
+                                }
+                              }}
                               className="theWord"
                             >
                               <SearchIcon
