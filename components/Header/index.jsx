@@ -16,6 +16,7 @@ import { Message_data } from "../../context/context";
 import { useContext } from "react";
 import { Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const pages = ["Home", "About Us", "Blog"];
 export const HeaderMain = ({ setMode }) => {
@@ -48,28 +49,19 @@ export const HeaderMain = ({ setMode }) => {
       <AppBar sx={{ boxShadow: "none" }}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <AdbIcon
-              sx={{ fill: "black", display: { xs: "none", md: "flex" }, mr: 1 }}
-            />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
+            <Box
               sx={{
-                mr: 2,
                 display: { xs: "none", md: "flex" },
-
-                textDecoration: "none",
-                fontSize: "30px",
-                fontWeight: "700",
-                letterSpacing: "1px",
-                color: "white",
-                fontFamily: '"Nunito", sans-serif',
+                width: "155px",
+                height: "50px",
+                "& img": {
+                  width: "auto !important",
+                  height: "50px !important",
+                },
               }}
             >
-              LOGO
-            </Typography>
+              <img src={"/logo.png"} alt="logo" />
+            </Box>
 
             <Box
               sx={{
@@ -111,42 +103,42 @@ export const HeaderMain = ({ setMode }) => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem
-                    key={page}
-                    onClick={() => handleCloseNavMenu()}
-                  >
-                    <a textAlign="center" href={page === "Home" ? "/" : "/about"}
-                    onClick={() =>  setIsPageLoaded(false)}
-                    >{page}</a>
+                  <MenuItem key={page} onClick={() => handleCloseNavMenu()}>
+                    <a
+                      textAlign="center"
+                      href={page === "Home" ? "/" : "/about"}
+                      onClick={() => setIsPageLoaded(false)}
+                    >
+                      {page}
+                    </a>
                   </MenuItem>
                 ))}
-                <MenuItem
-                    onClick={() =>   handleCloseNavMenu()}
+                <MenuItem onClick={() => handleCloseNavMenu()}>
+                  <a
+                    textAlign="center"
+                    href="/top200"
+                    onClick={() => setIsPageLoaded(false)}
                   >
-                    <a textAlign="center" href="/top200" onClick={() => setIsPageLoaded(false)} >Top 200</a>
-                  </MenuItem>
+                    Top 200
+                  </a>
+                </MenuItem>
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
+            <Box
               sx={{
-                mr: 2,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
-                textDecoration: "none",
-                fontSize: "30px",
-                fontWeight: "700",
-                letterSpacing: "1px",
-                color: "white",
-                fontFamily: '"Nunito", sans-serif',
+                width: "155px",
+                height: "50px",
+                "& img": {
+                  width: "auto !important",
+                  height: "50px !important",
+                },
               }}
             >
-              LOGO
-            </Typography>
+              <img src={"/logo.png"} alt="logo" />
+            </Box>
+
             <Box
               sx={{
                 flexGrow: 1,
@@ -158,9 +150,7 @@ export const HeaderMain = ({ setMode }) => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={() => 
-                    handleCloseNavMenu()
-                  }
+                  onClick={() => handleCloseNavMenu()}
                   sx={{
                     // my: 2,
                     display: "block",
@@ -176,36 +166,42 @@ export const HeaderMain = ({ setMode }) => {
                     },
                   }}
                 >
-                  <a textAlign="center" href={page === "Home" ? "/" : "/about"}
-                    onClick={() =>  setIsPageLoaded(false)}
-                    >{page}</a>
+                  <a
+                    textAlign="center"
+                    href={page === "Home" ? "/" : "/about"}
+                    onClick={() => setIsPageLoaded(false)}
+                  >
+                    {page}
+                  </a>
                 </Button>
               ))}
-                <Button
-                  onClick={() => 
-                    handleCloseNavMenu()
-                   }
-                  sx={{
-                    // my: 2,
-                    display: "block",
-                    fontSize: "16px",
-                    fontWeight: "700",
+              <Button
+                onClick={() => handleCloseNavMenu()}
+                sx={{
+                  // my: 2,
+                  display: "block",
+                  fontSize: "16px",
+                  fontWeight: "700",
+                  color: "#fff",
+                  whiteSpace: "nowrap",
+                  transition: "0.3s",
+                  textTransform: "none",
+                  fontFamily: '"Nunito", sans-serif',
+                  backgroundColor: "orange",
+                  "&:hover": {
                     color: "#fff",
-                    whiteSpace: "nowrap",
-                    transition: "0.3s",
-                    textTransform: "none",
-                    fontFamily: '"Nunito", sans-serif',
-                    backgroundColor:"orange",
-                    "&:hover": {
-                      color: "#fff",
-                      backgroundColor:"orange"
-                    },
-                  }}
+                    backgroundColor: "orange",
+                  },
+                }}
+              >
+                <a
+                  textAlign="center"
+                  href="/top200"
+                  onClick={() => setIsPageLoaded(false)}
                 >
-                  <a textAlign="center" href="/top200"
-                    onClick={() =>  setIsPageLoaded(false)}
-                    >Top 200</a>
-                </Button>
+                  Top 200
+                </a>
+              </Button>
             </Box>
             {theme === "light" ? (
               <Tooltip title="Dark Mode" placement="left">

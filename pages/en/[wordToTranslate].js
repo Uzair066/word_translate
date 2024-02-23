@@ -2,22 +2,38 @@ import WordTranslate from "@/components/en/WordTranslate";
 import axios from "axios";
 import Head from "next/head";
 
-function DetailPageTranslation({ engData, wordData, wordToTranslate, title, desc }) {
+function DetailPageTranslation({
+  engData,
+  wordData,
+  wordToTranslate,
+  title,
+  desc,
+}) {
   let splitParts = wordToTranslate?.split("-meaning-in-")[1];
 
   // Capitalize the first word
-  let capitalizedFirstWord = splitParts?.charAt(0).toUpperCase() + splitParts?.slice(1);
+  let capitalizedFirstWord =
+    splitParts?.charAt(0).toUpperCase() + splitParts?.slice(1);
   return (
     <>
       <Head>
-        <title>{`${wordToTranslate?.split("-meaning-in-")[0]} Meaning In ${
-          capitalizedFirstWord
-        } - ${title ? title : 'हिंदी अर्थ'} `}</title>
+        <title>{`${
+          wordToTranslate?.split("-meaning-in-")[0]
+        } Meaning In ${capitalizedFirstWord} - ${
+          title ? title : "हिंदी अर्थ"
+        } `}</title>
         <meta
           name="description"
-          content={`Meaning of ${wordToTranslate?.split("-meaning-in-")[0]} in ${capitalizedFirstWord} language with definitions, examples, antonym, synonym. ${desc ? desc : "हिंदी में अर्थ पढ़ें"}.`}
+          content={`Meaning of ${
+            wordToTranslate?.split("-meaning-in-")[0]
+          } in ${capitalizedFirstWord} language with definitions, examples, antonym, synonym. ${
+            desc ? desc : "हिंदी में अर्थ पढ़ें"
+          }.`}
         />
-        <meta name="keywords" content={wordToTranslate?.split("-meaning-in-")[0]}/>
+        <meta
+          name="keywords"
+          content={wordToTranslate?.split("-meaning-in-")[0]}
+        />
         <meta name="robots" content="index, follow" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="language" content="English" />
@@ -100,35 +116,35 @@ export async function getServerSideProps({ query }) {
       ? "తెలుగు అర్థం"
       : null;
 
-      const desc =
-      wordToTranslate?.split("-meaning-in-")[1] === "hindi "
-        ? "हिंदी में अर्थ पढ़ें."
-        : wordToTranslate?.split("-meaning-in-")[1] === "punjabi "
-        ? "ਪੰਜਾਬੀ ਵਿੱਚ ਅਰਥ ਪੜ੍ਹੋ।"
-        : wordToTranslate?.split("-meaning-in-")[1] === "urdu "
-        ? "اردو میں معنی پڑھیں۔"
-        : wordToTranslate?.split("-meaning-in-")[1] === "malayalam "
-        ? "മലയാളത്തിൽ അർത്ഥം വായിക്കുക."
-        : wordToTranslate?.split("-meaning-in-")[1] === "gujarati"
-        ? "ગુજરાતીમાં અર્થ વાંચો"
-        : wordToTranslate?.split("-meaning-in-")[1] === "kannada"
-        ? "ಕನ್ನಡದಲ್ಲಿ ಅರ್ಥವನ್ನು ಓದಿ"
-        : wordToTranslate?.split("-meaning-in-")[1] === "marathi"
-        ? "मराठीत अर्थ वाचा"
-        : wordToTranslate?.split("-meaning-in-")[1] === "tamil"
-        ? "தமிழில் அர்த்தம் படிக்கவும்"
-        : wordToTranslate?.split("-meaning-in-")[1] === "bengali"
-        ? "বাংলায় অর্থ পড়ুন"
-        : wordToTranslate?.split("-meaning-in-")[1] === "telugu"
-        ? "తెలుగులో అర్థం చదవండి"
-        : null;
+  const desc =
+    wordToTranslate?.split("-meaning-in-")[1] === "hindi "
+      ? "हिंदी में अर्थ पढ़ें."
+      : wordToTranslate?.split("-meaning-in-")[1] === "punjabi "
+      ? "ਪੰਜਾਬੀ ਵਿੱਚ ਅਰਥ ਪੜ੍ਹੋ।"
+      : wordToTranslate?.split("-meaning-in-")[1] === "urdu "
+      ? "اردو میں معنی پڑھیں۔"
+      : wordToTranslate?.split("-meaning-in-")[1] === "malayalam "
+      ? "മലയാളത്തിൽ അർത്ഥം വായിക്കുക."
+      : wordToTranslate?.split("-meaning-in-")[1] === "gujarati"
+      ? "ગુજરાતીમાં અર્થ વાંચો"
+      : wordToTranslate?.split("-meaning-in-")[1] === "kannada"
+      ? "ಕನ್ನಡದಲ್ಲಿ ಅರ್ಥವನ್ನು ಓದಿ"
+      : wordToTranslate?.split("-meaning-in-")[1] === "marathi"
+      ? "मराठीत अर्थ वाचा"
+      : wordToTranslate?.split("-meaning-in-")[1] === "tamil"
+      ? "தமிழில் அர்த்தம் படிக்கவும்"
+      : wordToTranslate?.split("-meaning-in-")[1] === "bengali"
+      ? "বাংলায় অর্থ পড়ুন"
+      : wordToTranslate?.split("-meaning-in-")[1] === "telugu"
+      ? "తెలుగులో అర్థం చదవండి"
+      : null;
   return {
     props: {
       wordToTranslate: wordToTranslate,
       engData: !!englishData ? englishData : null,
       wordData: wordApiData,
       title,
-      desc
+      desc,
     },
   };
 }
