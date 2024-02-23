@@ -25,13 +25,19 @@ function DetailPageTranslation({ engData, wordData, wordToTranslate }) {
 export async function getServerSideProps({ query }) {
   const { wordToTranslate } = query;
 
-  const resSearch = await axios.get(
+  const resSearch = await fetch(
     `https://api.browseword.com/api/search?word=${
       wordToTranslate?.split("-meaning-in-")[0]
-    }`
+    }`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
 
-  let englishData = resSearch?.data || null;
+  let englishData = await resSearch.json();
   const resDetails = await axios.get(
     `https://api.browseword.com/api/en/${
       wordToTranslate?.split("-meaning-in-")[1] === "urdu"
@@ -63,7 +69,7 @@ export async function getServerSideProps({ query }) {
   return {
     props: {
       wordToTranslate: wordToTranslate,
-      engData: englishData,
+      engData: !!englishData ? englishData : null,
       wordData: wordApiData,
     },
   };
