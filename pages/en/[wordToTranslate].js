@@ -12,7 +12,7 @@ function DetailPageTranslation({ engData, wordData, wordToTranslate, title, desc
         } - ${title ? title : 'हिंदी अर्थ'} `}</title>
         <meta
           name="description"
-          content={`Meaning of ${wordToTranslate?.split("-meaning-in-")[0]} in ${wordToTranslate?.split("-meaning-in-")[1]} language with definitions, examples, antonym, synonym. ${desc}.`}
+          content={`Meaning of ${wordToTranslate?.split("-meaning-in-")[0]} in ${wordToTranslate?.split("-meaning-in-")[1]} language with definitions, examples, antonym, synonym. ${desc ? desc : "हिंदी में अर्थ पढ़ें."}.`}
         />
         <meta name="keywords" content="Free online dictionary" />
         <meta name="robots" content="index, follow" />
