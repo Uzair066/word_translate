@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
-import { Message_data } from "../../context/context";
 import { useContext } from "react";
 import Alphabets from "@/components/Home/alphabets";
 import StartAlphabet from "@/components/StartAlphabet";
@@ -132,8 +131,8 @@ function WordMeaning() {
           paddingBottom: "5rem",
         }}
       >
-        <Alphabets />
         <StartAlphabet apiData={apiData} />
+        <Alphabets />
       </Box>
     </Container>
   );

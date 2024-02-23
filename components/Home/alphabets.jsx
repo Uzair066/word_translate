@@ -101,7 +101,7 @@ function Alphabets() {
               if (slug !== undefined) {
                 router.push(`/en/dictionary/${slug}/1?startWith=${item}`);
               } else {
-                router.push(`/alphabets/1?startWith=${item}`);
+                router.push(`/en/dictionary/english-to-hindi/1?startWith=${item}`);
               }
             }}
             sx={{

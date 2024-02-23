@@ -10,7 +10,7 @@ import { useContext } from "react";
 import Loader from "../Loader";
 
 function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
-  const { theme } = useContext(Message_data);
+  const { theme, setIsPageLoaded } = useContext(Message_data);
   const router = useRouter();
   const [inputWord, setInputWord] = useState(
     wordToTranslate?.split("-meaning-in-")[0]
@@ -21,6 +21,9 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
+      setIsPageLoaded(false);
+        setTimeout(() => {
+       
       router.push(
         `${inputWord}-${
           wordToTranslate?.split("-meaning-in-")[1] === "urdu"
@@ -46,6 +49,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
             : null
         }`
       );
+    }, 1000);
     }
   };
   const validateVendorForm = () => {

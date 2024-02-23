@@ -11,7 +11,7 @@ import Alphabets from "@/components/Home/alphabets";
 import StartAlphabet from "@/components/StartAlphabet";
 
 function PageWord() {
-  const { selectedLanguage, theme } = useContext(Message_data);
+  const { selectedLanguage, theme, setIsPageLoaded } = useContext(Message_data);
   const router = useRouter();
   const { slug, pageNumber, startWith } = router.query;
   const [inputWord, setInputWord] = useState("");
@@ -37,6 +37,8 @@ function PageWord() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
+      setIsPageLoaded(false);
+      setTimeout(() => {
       router.push(
         `/en/${inputWord}-${
           slug === "english-to-urdu"
@@ -62,6 +64,7 @@ function PageWord() {
             : null
         }`
       );
+    }, 1000);
     }
   };
   const validateVendorForm = () => {
@@ -181,8 +184,8 @@ function PageWord() {
           paddingBottom: "5rem",
         }}
       >
-        <Alphabets />
         <StartAlphabet apiData={apiData} />
+        <Alphabets />
       </Box>
     </Container>
   );

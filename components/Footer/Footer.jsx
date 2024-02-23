@@ -99,10 +99,8 @@ function Footer() {
               },
             }}
           >
-            {/* <KeyboardArrowRightIcon
-              sx={{ color: "orange", fontSize: "22px", lineHeight: 0 }}
-            /> */}
-            <span style={{borderBottom:"1px solid orange "}}>Terms of service</span>
+
+          <a href="/terms"> <span style={{borderBottom:"1px solid orange "}}>Terms of service</span></a> 
           </Box>
         </Box>
         <Box
@@ -113,16 +111,7 @@ function Footer() {
               fontFamily: '"Nunito", sans-serif',
               fontSize: "14px",
             },
-            // "& .credits": {
-            //   paddingTop: "10px",
-              // textAlign: "center",
-            //   fontSize: "13px",
-            //   color: "white",
-            //   "& a": {
-            //     color: "orange",
-            //     textDecoration: "none",
-            //   },
-            // },
+        
           }}
         >
           <div className="copyright">

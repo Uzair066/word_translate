@@ -21,7 +21,7 @@ function Home({ posts }) {
     if (validateVendorForm()) {
       setIsPageLoaded(false)
       setTimeout(() => {
-        router.push(`dictionary/${inputWord}`);
+        router.push(`/en/${inputWord}-meaning-in-hindi`);
       }, 1000);
     }
   };
@@ -208,7 +208,12 @@ function Home({ posts }) {
                   </span>
                 </Box>
                 <span
-                  onClick={() => router.push(`dictionary/sulk`)}
+                  onClick={() => {
+                    setIsPageLoaded(false) 
+                    setTimeout(() => {
+                    router.push(`/en/sulk-meaning-in-hindi`)
+                  }, 1000);
+                  }}
                   className="theWord"
                 >
                   sulk
@@ -284,7 +289,14 @@ function Home({ posts }) {
                   <span className="theTxt">now</span>
                 </Box>
                 <p
-                  onClick={() => router.push(`dictionary/sulk`)}
+                  onClick={() => 
+                    {
+                      setIsPageLoaded(false) 
+                      setTimeout(() => {
+                      router.push(`/en/sulk-meaning-in-hindi`)
+                    }, 1000);
+                    }
+                  }
                   className="theWord"
                 >
                   <SearchIcon sx={{ fontSize: "16px", marginRight: "10px" }} />

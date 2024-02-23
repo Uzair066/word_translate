@@ -13,11 +13,11 @@ import AdbIcon from "@mui/icons-material/Adb";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { Message_data } from "../../context/context";
-const pages = ["Home", "About Us", "Blog"];
 import { useContext } from "react";
 import { Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 
+const pages = ["Home", "About Us", "Blog"];
 export const HeaderMain = ({ setMode }) => {
   const router = useRouter();
   const { theme, setTheme, setIsPageLoaded } = useContext(Message_data);
@@ -114,9 +114,15 @@ export const HeaderMain = ({ setMode }) => {
                   <MenuItem
                     key={page}
                     onClick={() => {
-                      handleCloseNavMenu();
-                      router.push("/");
-                    }}
+                      {handleCloseNavMenu();
+                        setIsPageLoaded(false)
+                        setIsPageLoaded(false);
+                        setTimeout(() => {
+                          if (page === "Home") router.push("/");
+                          if (page === "About Us") router.push("/about");
+                        }, 1000);
+                     
+                    }}}
                   >
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -167,7 +173,11 @@ export const HeaderMain = ({ setMode }) => {
                   key={page}
                   onClick={() => {
                     handleCloseNavMenu();
-                    if (page === "Home") router.push("/");
+                    setIsPageLoaded(false);
+                        setTimeout(() => {
+                          if (page === "Home") router.push("/");
+                          if (page === "About Us") router.push("/about");
+                        }, 1000);
                   }}
                   sx={{
                     // my: 2,
@@ -200,13 +210,15 @@ export const HeaderMain = ({ setMode }) => {
                     display: "block",
                     fontSize: "16px",
                     fontWeight: "700",
-                    color: "orange",
+                    color: "#fff",
                     whiteSpace: "nowrap",
                     transition: "0.3s",
                     textTransform: "none",
                     fontFamily: '"Nunito", sans-serif',
+                    backgroundColor:"orange",
                     "&:hover": {
-                      color: "orange",
+                      color: "#fff",
+                      backgroundColor:"orange"
                     },
                   }}
                 >
