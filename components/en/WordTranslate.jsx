@@ -21,35 +21,36 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
-      setIsPageLoaded(false);
+      if (wordToTranslate?.split("-meaning-in-")[0].toLowerCase() != inputWord.toLowerCase()) {
+        setIsPageLoaded(false);
         setTimeout(() => {
-       
-      router.push(
-        `${inputWord}-${
-          wordToTranslate?.split("-meaning-in-")[1] === "urdu"
-            ? "meaning-in-urdu"
-            : wordToTranslate?.split("-meaning-in-")[1] === "punjabi"
-            ? "meaning-in-punjabi"
-            : wordToTranslate?.split("-meaning-in-")[1] === "hindi"
-            ? "meaning-in-hindi"
-            : wordToTranslate?.split("-meaning-in-")[1] === "tamil"
-            ? "meaning-in-tamil"
-            : wordToTranslate?.split("-meaning-in-")[1] === "telugu"
-            ? "meaning-in-telugu"
-            : wordToTranslate?.split("-meaning-in-")[1] === "bengali"
-            ? "meaning-in-bengali"
-            : wordToTranslate?.split("-meaning-in-")[1] === "kannada"
-            ? "meaning-in-kannada"
-            : wordToTranslate?.split("-meaning-in-")[1] === "marathi"
-            ? "meaning-in-marathi"
-            : wordToTranslate?.split("-meaning-in-")[1] === "malayalam"
-            ? "meaning-in-malayalam"
-            : wordToTranslate?.split("-meaning-in-")[1] === "gujarati"
-            ? "meaning-in-gujarati"
-            : null
-        }`
-      );
-    }, 1000);
+          router.push(
+            `${inputWord}-${
+              wordToTranslate?.split("-meaning-in-")[1] === "urdu"
+                ? "meaning-in-urdu"
+                : wordToTranslate?.split("-meaning-in-")[1] === "punjabi"
+                ? "meaning-in-punjabi"
+                : wordToTranslate?.split("-meaning-in-")[1] === "hindi"
+                ? "meaning-in-hindi"
+                : wordToTranslate?.split("-meaning-in-")[1] === "tamil"
+                ? "meaning-in-tamil"
+                : wordToTranslate?.split("-meaning-in-")[1] === "telugu"
+                ? "meaning-in-telugu"
+                : wordToTranslate?.split("-meaning-in-")[1] === "bengali"
+                ? "meaning-in-bengali"
+                : wordToTranslate?.split("-meaning-in-")[1] === "kannada"
+                ? "meaning-in-kannada"
+                : wordToTranslate?.split("-meaning-in-")[1] === "marathi"
+                ? "meaning-in-marathi"
+                : wordToTranslate?.split("-meaning-in-")[1] === "malayalam"
+                ? "meaning-in-malayalam"
+                : wordToTranslate?.split("-meaning-in-")[1] === "gujarati"
+                ? "meaning-in-gujarati"
+                : null
+            }`
+          );
+        }, 1000);
+      }
     }
   };
   const validateVendorForm = () => {
@@ -340,8 +341,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                   onClick={() =>
                                     router.push(
                                       `/en/${
-                                          englishData?.[index]?.synonyms
-                                        ?.[i]
+                                        englishData?.[index]?.synonyms?.[i]
                                       }-meaning-in-${
                                         wordToTranslate?.split(
                                           "-meaning-in-"
