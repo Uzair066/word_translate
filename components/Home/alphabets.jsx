@@ -95,15 +95,15 @@ function Alphabets() {
         }}
       >
         {alphabetsArray.map((item) => (
+           <a
+           href={
+             slug !== undefined
+               ? `/en/dictionary/${slug}/1?startWith=${item}`
+               : `/en/dictionary/english-to-hindi/1?startWith=${item}`
+           }
+         >
           <Box
             key={item}
-            onClick={() => {
-              if (slug !== undefined) {
-                router.push(`/en/dictionary/${slug}/1?startWith=${item}`);
-              } else {
-                router.push(`/en/dictionary/english-to-hindi/1?startWith=${item}`);
-              }
-            }}
             sx={{
               borderRadius: "0.25rem",
               height: "2.5rem",
@@ -123,8 +123,10 @@ function Alphabets() {
               },
             }}
           >
-            <p>{item}</p>
+           
+              {item}
           </Box>
+            </a>
         ))}
       </Box>
     </Box>

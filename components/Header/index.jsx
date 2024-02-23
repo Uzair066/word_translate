@@ -113,30 +113,17 @@ export const HeaderMain = ({ setMode }) => {
                 {pages.map((page) => (
                   <MenuItem
                     key={page}
-                    onClick={() => {
-                      {handleCloseNavMenu();
-                        setIsPageLoaded(false)
-                        setIsPageLoaded(false);
-                        setTimeout(() => {
-                          if (page === "Home") router.push("/");
-                          if (page === "About Us") router.push("/about");
-                        }, 1000);
-                     
-                    }}}
+                    onClick={() => handleCloseNavMenu()}
                   >
-                    <Typography textAlign="center">{page}</Typography>
+                    <a textAlign="center" href={page === "Home" ? "/" : "/about"}
+                    onClick={() =>  setIsPageLoaded(false)}
+                    >{page}</a>
                   </MenuItem>
                 ))}
                 <MenuItem
-                    onClick={() => {
-                      handleCloseNavMenu();
-                      setIsPageLoaded(false)
-                      setTimeout(() => {
-                        router.push("/top200");
-                      }, 1000);
-                    }}
+                    onClick={() =>   handleCloseNavMenu()}
                   >
-                    <Typography textAlign="center">Top 200</Typography>
+                    <a textAlign="center" href="/top200" onClick={() => setIsPageLoaded(false)} >Top 200</a>
                   </MenuItem>
               </Menu>
             </Box>
@@ -171,14 +158,9 @@ export const HeaderMain = ({ setMode }) => {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    setIsPageLoaded(false);
-                        setTimeout(() => {
-                          if (page === "Home") router.push("/");
-                          if (page === "About Us") router.push("/about");
-                        }, 1000);
-                  }}
+                  onClick={() => 
+                    handleCloseNavMenu()
+                  }
                   sx={{
                     // my: 2,
                     display: "block",
@@ -194,17 +176,15 @@ export const HeaderMain = ({ setMode }) => {
                     },
                   }}
                 >
-                  {page}
+                  <a textAlign="center" href={page === "Home" ? "/" : "/about"}
+                    onClick={() =>  setIsPageLoaded(false)}
+                    >{page}</a>
                 </Button>
               ))}
                 <Button
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    setIsPageLoaded(false)
-                    setTimeout(() => {
-                      router.push("/top200");
-                    }, 1000);
-                  }}
+                  onClick={() => 
+                    handleCloseNavMenu()
+                   }
                   sx={{
                     // my: 2,
                     display: "block",
@@ -222,7 +202,9 @@ export const HeaderMain = ({ setMode }) => {
                     },
                   }}
                 >
-                  Top 200
+                  <a textAlign="center" href="/top200"
+                    onClick={() =>  setIsPageLoaded(false)}
+                    >Top 200</a>
                 </Button>
             </Box>
             {theme === "light" ? (

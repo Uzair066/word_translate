@@ -335,17 +335,7 @@ function DictionarySlug({ wordApiData, slug }) {
                 </Grid>
               </>
             ) : (
-              <Box
-                sx={{
-                  fontSize: "2rem",
-                  fontWeight: "bold",
-                  color: "red",
-                  textAlign: "center",
-                  fontFamily: '"Nunito",sans-serif',
-                }}
-              >
-                {`No word details found for ${slug}!`}
-              </Box>
+              router.push("/404")
             )}
           </>
         </Container>

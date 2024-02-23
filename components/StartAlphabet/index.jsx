@@ -71,31 +71,7 @@ function StartAlphabet({ apiData }) {
         {!!apiData?.data?.length &&
           apiData?.data?.map((item, index) => (
             <Grid key={index} item xs={12} md={6} lg={3} xl={3}>
-              <Box
-                sx={{
-                  borderRadius: "0.25rem",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "white",
-                  padding: "0.5rem",
-                  "&:hover": {
-                    backgroundColor: "rgba(180,180,180,1)",
-                  },
-                  "& p": {
-                    textTransform: "capitalize",
-                    fontSize: ".875rem",
-                    lineHeight: "1.25rem",
-                    margin: "0px",
-                    fontFamily: '"Nunito", sans-serif',
-                  },
-                }}
-                onClick={() => {
-                  if (slug !== undefined) {
-                    setIsPageLoaded(false)
-                    setTimeout(() => {
-                    router.push(
-                      `/en/${item?.word}-${
+              <a href={`/en/${item?.word}-${
                         slug === "english-to-urdu"
                           ? "meaning-in-urdu"
                           : slug === "english-to-punjabi"
@@ -116,21 +92,33 @@ function StartAlphabet({ apiData }) {
                           ? "meaning-in-malayalam"
                           : slug === "english-to-gujarati"
                           ? "meaning-in-gujarati"
-                          : null
-                      }`
-                    );     
-                  }, 1000)
-                  } else {
-                    setIsPageLoaded(false)
-                    setTimeout(() => {
-                    router.push(`/dictionary/${item?.word}`);
-                  }, 1000)
-                  }
+                          : 'null'
+                      }`}>
+              <Box
+                sx={{
+                  borderRadius: "0.25rem",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "white",
+                  padding: "0.5rem",
+                  "&:hover": {
+                    backgroundColor: "rgba(180,180,180,1)",
+                  },
+                  "& p": {
+                    textTransform: "capitalize",
+                    fontSize: ".875rem",
+                    lineHeight: "1.25rem",
+                    margin: "0px",
+                    fontFamily: '"Nunito", sans-serif',
+                  },
                 }}
+                
               >
                 <SearchIcon sx={{ fontSize: "16px", marginRight: "10px" }} />
                 <p>{item?.word}</p>
               </Box>
+              </a>
             </Grid>
           ))}
       </Grid>

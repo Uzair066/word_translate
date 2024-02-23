@@ -3,18 +3,21 @@ import axios from "axios";
 import Head from "next/head";
 
 function DetailPageTranslation({ engData, wordData, wordToTranslate, title, desc }) {
-  console.log(wordData);
+  let splitParts = wordToTranslate?.split("-meaning-in-")[1];
+
+  // Capitalize the first word
+  let capitalizedFirstWord = splitParts?.charAt(0).toUpperCase() + splitParts?.slice(1);
   return (
     <>
       <Head>
         <title>{`${wordToTranslate?.split("-meaning-in-")[0]} Meaning In ${
-          wordToTranslate?.split("-meaning-in-")[1]
+          capitalizedFirstWord
         } - ${title ? title : 'हिंदी अर्थ'} `}</title>
         <meta
           name="description"
-          content={`Meaning of ${wordToTranslate?.split("-meaning-in-")[0]} in ${wordToTranslate?.split("-meaning-in-")[1]} language with definitions, examples, antonym, synonym. ${desc ? desc : "हिंदी में अर्थ पढ़ें."}.`}
+          content={`Meaning of ${wordToTranslate?.split("-meaning-in-")[0]} in ${capitalizedFirstWord} language with definitions, examples, antonym, synonym. ${desc ? desc : "हिंदी में अर्थ पढ़ें"}.`}
         />
-        <meta name="keywords" content="Free online dictionary" />
+        <meta name="keywords" content={wordToTranslate?.split("-meaning-in-")[0]}/>
         <meta name="robots" content="index, follow" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="language" content="English" />

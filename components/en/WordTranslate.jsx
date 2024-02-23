@@ -556,19 +556,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                 </Grid>
               </>
             ) : (
-              <Box
-                sx={{
-                  fontSize: "2rem",
-                  fontWeight: "bold",
-                  color: "red",
-                  textAlign: "center",
-                  fontFamily: '"Nunito",sans-serif',
-                }}
-              >
-                {`No word details found for ${
-                  wordToTranslate?.split("-meaning-in-")[0]
-                }!`}
-              </Box>
+              router.push("/404")
             )}
           </>
         </Container>

@@ -61,6 +61,7 @@ function LanguageDictionaries() {
       </Box>
       <Grid container spacing={3} sx={{ marginTop: "0.5rem" }}>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-hindi/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -82,14 +83,15 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-hindi");
-              router.push(`en/dictionary/english-to-hindi/1`);
             }}
           >
-            <p>English to Hindi</p>
+           English to Hindi
           </Box>
+          </a>
         </Grid>
 
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-tamil/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -111,13 +113,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-tamil");
-              router.push(`en/dictionary/english-to-tamil/1`);
             }}
           >
-            <p>English to Tamil</p>
+            English to Tamil
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-telugu/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -139,13 +142,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-telugu");
-              router.push(`en/dictionary/english-to-telugu/1`);
             }}
           >
-            <p>English to Telugu</p>
+            English to Telugu
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-bengali/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -167,13 +171,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-bengali");
-              router.push(`en/dictionary/english-to-bengali/1`);
             }}
           >
-            <p>English to Bengali</p>
+            English to Bengali
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-kannada/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -195,13 +200,15 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-kannada");
-              router.push(`en/dictionary/english-to-kannada/1`);
+              router.push(``);
             }}
           >
-            <p>English to Kannada</p>
+           English to Kannada
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-marathi/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -223,13 +230,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-marathi");
-              router.push(`en/dictionary/english-to-marathi/1`);
             }}
           >
-            <p>English to Marathi</p>
+            English to Marathi
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-malayalam/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -251,13 +259,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-malayalam");
-              router.push(`en/dictionary/english-to-malayalam/1`);
             }}
           >
-            <p>English to Malayalam</p>
+          English to Malayalam
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-gujarati/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -279,13 +288,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-gujarati");
-              router.push(`en/dictionary/english-to-gujarati/1`);
             }}
           >
-            <p>English to Gujarati</p>
+           English to Gujarati
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-punjabi/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -307,13 +317,14 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-punjabi");
-              router.push(`en/dictionary/english-to-punjabi/1`);
             }}
           >
-            <p>English to Punjabi</p>
+           English to Punjabi
           </Box>
+          </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <a href="en/dictionary/english-to-urdu/1">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -335,11 +346,11 @@ function LanguageDictionaries() {
             }}
             onClick={() => {
               setSelectedLanguage("english-to-urdu");
-              router.push(`en/dictionary/english-to-urdu/1`);
             }}
           >
-            <p>English to Urdu</p>
+            English to Urdu
           </Box>
+          </a>
         </Grid>
       </Grid>
     </Box>

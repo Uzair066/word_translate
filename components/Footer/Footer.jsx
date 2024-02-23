@@ -62,7 +62,7 @@ function Footer() {
             {/* <KeyboardArrowRightIcon
               sx={{ color: "orange", fontSize: "22px", lineHeight: 0 }}
             /> */}
-            <span style={{borderBottom:"1px solid orange "}}>About us</span>
+           <a href="/about"><span style={{borderBottom:"1px solid orange "}}>About us</span></a>  
           </Box>
           <Box
             sx={{
