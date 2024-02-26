@@ -11,7 +11,7 @@ import { useContext } from "react";
 
 function Home({ posts }) {
   const router = useRouter();
-  const { theme, isPageLoaded,   setIsPageLoaded } = useContext(Message_data);
+  const { theme, isPageLoaded, setIsPageLoaded } = useContext(Message_data);
 
   // const [popular, setPopular] = useState([posts]);
   const [inputWord, setInputWord] = useState("");
@@ -19,7 +19,7 @@ function Home({ posts }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
-      setIsPageLoaded(false)
+      setIsPageLoaded(false);
       setTimeout(() => {
         router.push(`/en/${inputWord}-meaning-in-hindi`);
       }, 1000);
@@ -33,7 +33,7 @@ function Home({ posts }) {
     setValidated(true);
     return true;
   };
- 
+
   return (
     <Box>
       <Container maxWidth={"lg"}>
@@ -207,16 +207,13 @@ function Home({ posts }) {
                     the<span> </span>day
                   </span>
                 </Box>
-                <span
-                  onClick={() => {
-                    setIsPageLoaded(false) 
-                    setTimeout(() => {
-                    router.push(`/en/sulk-meaning-in-hindi`)
-                  }, 1000);
-                  }}
-                  className="theWord"
-                >
-                  sulk
+                <span className="theWord">
+                  <a
+                    href="/en/sulk-meaning-in-hindi"
+                    onClick={() => setIsPageLoaded(false)}
+                  >
+                    sulk
+                  </a>
                 </span>
                 <p className="synonymTxt">somurtmak</p>
                 <p className="descriptionTxt">
@@ -288,20 +285,17 @@ function Home({ posts }) {
 
                   <span className="theTxt">now</span>
                 </Box>
-                <p
-                  onClick={() => 
-                    {
-                      setIsPageLoaded(false) 
-                      setTimeout(() => {
-                      router.push(`/en/sulk-meaning-in-hindi`)
-                    }, 1000);
-                    }
-                  }
-                  className="theWord"
+                <a
+                  href="/en/sulk-meaning-in-hindi"
+                  onClick={() => setIsPageLoaded(false)}
                 >
-                  <SearchIcon sx={{ fontSize: "16px", marginRight: "10px" }} />
-                  sulk
-                </p>
+                  <p className="theWord">
+                    <SearchIcon
+                      sx={{ fontSize: "16px", marginRight: "10px" }}
+                    />
+                    sulk
+                  </p>
+                </a>
               </Box>
             </Grid>
             <Grid item xs={12}>

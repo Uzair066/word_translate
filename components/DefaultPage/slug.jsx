@@ -10,7 +10,7 @@ import axios from "axios";
 import Alphabets from "@/components/Home/alphabets";
 import StartAlphabet from "@/components/StartAlphabet";
 
-function PageWord() {
+function PageDefault() {
   const { theme, setIsPageLoaded } = useContext(Message_data);
   const router = useRouter();
   const { slug, pageNumber, startWith } = router.query;
@@ -26,7 +26,7 @@ function PageWord() {
   const getAlphabeticalData = async () => {
     await axios
       .get(
-        `https://api.browseword.com/api/alphabets/${pageNumber}?startWith=${
+        `https://api.browseword.com/api/alphabets/${pageNumber || 1}?startWith=${
           startWith ? startWith : "A"
         }`
       )
@@ -191,4 +191,4 @@ function PageWord() {
   );
 }
 
-export default PageWord;
+export default PageDefault;

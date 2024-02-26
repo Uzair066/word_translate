@@ -49,20 +49,21 @@ export const HeaderMain = ({ setMode }) => {
       <AppBar sx={{ boxShadow: "none" }}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <Box
-              sx={{
-                display: { xs: "none", md: "flex" },
-                width: "155px",
-                height: "50px",
-                "& img": {
-                  width: "auto !important",
-                  height: "50px !important",
-                },
-              }}
-            >
-              <img src={"/logo.png"} alt="logo" />
-            </Box>
-
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  width: "155px",
+                  height: "50px",
+                  "& img": {
+                    width: "auto !important",
+                    height: "50px !important",
+                  },
+                }}
+              >
+                <a href="/" onClick={() => setIsPageLoaded(false)}>
+                <img src={"/BrowseLogo.png"} alt="logo" />
+            </a>
+              </Box>
             <Box
               sx={{
                 flexGrow: 1,
@@ -135,8 +136,10 @@ export const HeaderMain = ({ setMode }) => {
                   height: "50px !important",
                 },
               }}
-            >
-              <img src={"/logo.png"} alt="logo" />
+              >
+               <a href="/" onClick={() => setIsPageLoaded(false)}>
+              <img src={"/BrowseLogo.png"} alt="logo" />
+            </a>
             </Box>
 
             <Box

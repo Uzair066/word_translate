@@ -61,7 +61,7 @@ function LanguageDictionaries() {
       </Box>
       <Grid container spacing={3} sx={{ marginTop: "0.5rem" }}>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-hindi/1">
+        <a href="en/dictionary/english-to-hindi">
           <Box
             sx={{
               borderRadius: "0.75rem",

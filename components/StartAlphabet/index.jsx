@@ -12,7 +12,7 @@ function StartAlphabet({ apiData }) {
   const { slug, pageNumber, startWith } = router.query;
   const [page, setpage] = useState(1);
   useEffect(() => {
-    setpage(+pageNumber);
+    setpage(+pageNumber || 1);
   }, [pageNumber]);
 
   return (
@@ -142,12 +142,16 @@ function StartAlphabet({ apiData }) {
             onChange={(event, value) => {
               if (slug !== undefined) {
                 router.push(
-                  `/en/dictionary/${slug}/${value}?startWith=${startWith}`
+                  `/en/dictionary/${slug}/${value}?startWith=${startWith || "A"}`
                 );
               } else {
-                router.push(`/alphabets/${value}?startWith=${startWith}`);
+                router.push(`/alphabets/${value}?startWith=${startWith || "A"}`);
               }
             }}
+            title={slug !== undefined ?
+              `/en/dictionary/${slug}/${page}?startWith=${startWith || "A"}` :
+              `/alphabets/${page}?startWith=${startWith || "A"}`
+            }
             variant="outlined"
             shape="rounded"
           />
