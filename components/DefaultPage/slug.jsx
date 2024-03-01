@@ -182,6 +182,9 @@ function PageDefault() {
           marginTop: "1.6rem",
           borderRadius: "4px 4px 4px 4px",
           paddingBottom: "5rem",
+          '@media (max-width: 500px)': {
+            padding: "30px 5px 30px 5px",
+          }
         }}
       >
         <StartAlphabet apiData={apiData} />

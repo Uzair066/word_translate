@@ -117,7 +117,7 @@ function Footer() {
           <div className="copyright">
             © Copyright{" "}
             <strong>
-              <span>LOGO</span>
+              <span>{new Date().getFullYear()}</span>
             </strong>
             . All Rights Reserved
           </div>

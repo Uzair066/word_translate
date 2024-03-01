@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { Message_data } from "../../context/context";
@@ -8,6 +8,7 @@ function Top200({ top200 }) {
   const { setIsPageLoaded } = useContext(Message_data);
 
   return (
+    <Container maxWidth="lg">
     <Box
       sx={{
         marginTop: "130px",
@@ -92,6 +93,7 @@ function Top200({ top200 }) {
           ))}
       </Grid>
     </Box>
+    </Container>
   );
 }
 

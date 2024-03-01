@@ -8,10 +8,11 @@ import LanguageDictionaries from "./languageDictionaries";
 import Alphabets from "./alphabets";
 import { Message_data } from "../../context/context";
 import { useContext } from "react";
+import SentenceDictionaries from "./sentence";
 
 function Home({ posts }) {
   const router = useRouter();
-  const { theme, isPageLoaded, setIsPageLoaded } = useContext(Message_data);
+  const { theme, setIsPageLoaded } = useContext(Message_data);
 
   // const [popular, setPopular] = useState([posts]);
   const [inputWord, setInputWord] = useState("");
@@ -303,6 +304,9 @@ function Home({ posts }) {
             </Grid>
             <Grid item xs={12}>
               <PopularWords popular={posts} />
+            </Grid>
+            <Grid item xs={12}>
+              <SentenceDictionaries />
             </Grid>
             <Grid item xs={12}>
               <Alphabets />

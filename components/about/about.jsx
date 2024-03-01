@@ -1,14 +1,26 @@
 import { Box, Container, Divider, Grid, Rating } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import { Message_data } from "../../context/context";
 import { useContext } from "react";
 import Image from "next/image";
 import yourImage from "../../public/aboutWord.png";
+import { useRouter } from 'next/router';
 
 function About() {
   const { setIsPageLoaded } = useContext(Message_data);
+  const router = useRouter();
+  useEffect(() => {
+    // Redirect using client-side navigation if not on the server
+    if (typeof window !== 'undefined') {
+      const { pathname } = router;
 
+      // Redirect to the same route with a trailing slash if it doesn't already have one
+      if (!pathname.endsWith('/')) {
+        router.push(pathname + '/', undefined, { shallow: true });
+      }
+    }
+  }, [])
   return (
     <Container>
       <Box

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Message_data } from "../../context/context";
 import { useContext } from "react";
 
-function LanguageDictionaries() {
+function SentenceDictionaries() {
   const { setSelectedLanguage } = useContext(Message_data);
   const router = useRouter();
 
@@ -56,12 +56,12 @@ function LanguageDictionaries() {
           },
         }}
       >
-        <span className="wordTxt">LANGUAGE</span>
-        <span className="theTxt">Dictionaries</span>
+        <span className="wordTxt">Sentence</span>
+        <span className="theTxt">Translator</span>
       </Box>
       <Grid container spacing={3} sx={{ marginTop: "0.5rem" }}>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-hindi">
+        <a href="translator/english-to-hindi">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -91,7 +91,7 @@ function LanguageDictionaries() {
         </Grid>
 
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-tamil">
+        <a href="translator/english-to-tamil">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -120,7 +120,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-telugu">
+        <a href="translator/english-to-telugu">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -149,7 +149,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-bengali">
+        <a href="translator/english-to-bengali">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -178,7 +178,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-kannada">
+        <a href="translator/english-to-kannada">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -208,7 +208,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-marathi">
+        <a href="translator/english-to-marathi">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -237,7 +237,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-malayalam">
+        <a href="translator/english-to-malayalam">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -266,7 +266,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-gujarati">
+        <a href="translator/english-to-gujarati">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -295,7 +295,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-punjabi">
+        <a href="translator/english-to-punjabi">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -324,7 +324,7 @@ function LanguageDictionaries() {
           </a>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-        <a href="en/dictionary/english-to-urdu">
+        <a href="translator/english-to-urdu">
           <Box
             sx={{
               borderRadius: "0.75rem",
@@ -357,4 +357,4 @@ function LanguageDictionaries() {
   );
 }
 
-export default LanguageDictionaries;
+export default SentenceDictionaries;

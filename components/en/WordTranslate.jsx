@@ -400,7 +400,9 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                 </b>
                               </p>
                               <Box sx={{ marginBottom: "8px" }}>
-                                <p>
+                                <p style={{
+                                    wordBreak:"break-all"
+                                  }}>
                                   {item?.is_a_type_of === ""
                                     ? null
                                     : item?.is_a_type_of?.toString()}
@@ -409,6 +411,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                   style={{
                                     fontSize: "small",
                                     color: "#716f6f",
+                                    wordBreak:"break-all"
                                   }}
                                 >
                                   {englishData?.[index]?.is_a_type_of === ""

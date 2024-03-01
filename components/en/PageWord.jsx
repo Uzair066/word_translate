@@ -26,7 +26,7 @@ function PageWord() {
   const getAlphabeticalData = async () => {
     await axios
       .get(
-        `https://api.browseword.com/api/alphabets/${pageNumber}?startWith=${
+        `https://api.browseword.com/api/alphabets/${pageNumber || 1}?startWith=${
           startWith ? startWith : "A"
         }`
       )

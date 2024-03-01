@@ -98,8 +98,8 @@ function Alphabets() {
            <a
            href={
              slug !== undefined
-               ? `/en/dictionary/${slug}/1?startWith=${item}`
-               : `/en/dictionary/english-to-hindi/1?startWith=${item}`
+               ? `/en/dictionary/${slug}/?startWith=${item}`
+               : `/en/dictionary/english-to-hindi/?startWith=${item}`
            }
          >
           <Box
