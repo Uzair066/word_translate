@@ -21,7 +21,10 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateVendorForm()) {
-      if (wordToTranslate?.split("-meaning-in-")[0].toLowerCase() != inputWord.toLowerCase()) {
+      if (
+        wordToTranslate?.split("-meaning-in-")[0].toLowerCase() !=
+        inputWord.toLowerCase()
+      ) {
         setIsPageLoaded(false);
         setTimeout(() => {
           router.push(
@@ -338,17 +341,20 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                 <Box
                                   key={i}
                                   className="textToClick"
-                                  onClick={() =>
-                                    router.push(
-                                      `/en/${
-                                        englishData?.[index]?.synonyms?.[i]
-                                      }-meaning-in-${
-                                        wordToTranslate?.split(
-                                          "-meaning-in-"
-                                        )[1]
-                                      }`
-                                    )
-                                  }
+                                  onClick={() => {
+                                    setIsPageLoaded(false);
+                                    setTimeout(() => {
+                                      router.push(
+                                        `/en/${
+                                          englishData?.[index]?.synonyms?.[i]
+                                        }-meaning-in-${
+                                          wordToTranslate?.split(
+                                            "-meaning-in-"
+                                          )[1]
+                                        }`
+                                      );
+                                    }, 1000);
+                                  }}
                                 >
                                   <p>{data}</p>
                                   <p
@@ -400,9 +406,11 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                 </b>
                               </p>
                               <Box sx={{ marginBottom: "8px" }}>
-                                <p style={{
-                                    wordBreak:"break-all"
-                                  }}>
+                                <p
+                                  style={{
+                                    wordBreak: "break-all",
+                                  }}
+                                >
                                   {item?.is_a_type_of === ""
                                     ? null
                                     : item?.is_a_type_of?.toString()}
@@ -411,7 +419,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                   style={{
                                     fontSize: "small",
                                     color: "#716f6f",
-                                    wordBreak:"break-all"
+                                    wordBreak: "break-all",
                                   }}
                                 >
                                   {englishData?.[index]?.is_a_type_of === ""
@@ -530,15 +538,18 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                             <p
                               key={index}
                               className="theWord"
-                              onClick={() =>
-                                router.push(
-                                  `/en/${
-                                    englishData?.[0]?.rhymes?.[index]
-                                  }-meaning-in-${
-                                    wordToTranslate?.split("-meaning-in-")[1]
-                                  }`
-                                )
-                              }
+                              onClick={() =>{
+                                setIsPageLoaded(false);
+                                setTimeout(() => {
+                                  router.push(
+                                    `/en/${
+                                      englishData?.[0]?.rhymes?.[index]
+                                    }-meaning-in-${
+                                      wordToTranslate?.split("-meaning-in-")[1]
+                                    }`
+                                  )
+                                }, 1000);
+                              }}
                             >
                               <SearchIcon
                                 sx={{
