@@ -13,7 +13,7 @@ const ClearCa = () => {
 
     // Call the clearCache function when the component mounts
     clearCache();
-  }, [router]);
+  }, []);
 
   return (
     <></>

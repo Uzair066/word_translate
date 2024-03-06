@@ -342,7 +342,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                   key={i}
                                   className="textToClick"
                                   onClick={() => {
-                                    setIsPageLoaded(false);
+                                    setIsPageLoaded(false)
                                     setTimeout(() => {
                                       router.push(
                                         `/en/${
@@ -352,7 +352,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                             "-meaning-in-"
                                           )[1]
                                         }`
-                                      );
+                                      )
                                     }, 1000);
                                   }}
                                 >
@@ -539,7 +539,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                               key={index}
                               className="theWord"
                               onClick={() =>{
-                                setIsPageLoaded(false);
+                                setIsPageLoaded(false)
                                 setTimeout(() => {
                                   router.push(
                                     `/en/${
@@ -548,7 +548,7 @@ function WordTranslate({ englishData, wordApiData, wordToTranslate }) {
                                       wordToTranslate?.split("-meaning-in-")[1]
                                     }`
                                   )
-                                }, 1000);
+                                }, 1000)
                               }}
                             >
                               <SearchIcon
