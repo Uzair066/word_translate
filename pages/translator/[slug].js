@@ -3,7 +3,7 @@ import TranslateSentence from "@/components/sentence/TranslateSentence";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-function DefaultSentence({title}) {
+function DefaultSentence({title, htmlData}) {
   let splitParts = title?.split("-")[0];
 
   // Capitalize the first word
@@ -46,20 +46,34 @@ function DefaultSentence({title}) {
         />
       </Head>
       <main>
-        <TranslateSentence />
+        <TranslateSentence htmlData={htmlData}/>
       </main>
     </>
   );
 }
 export async function getServerSideProps({ query }) {
   const { slug } = query;
-console.log(slug);
+
 
   const title =slug
 
+  const resSearch = await fetch(
+    `http://localhost:3000/api/translator/${
+      slug
+    }`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  let htmlData = await resSearch.json();
+  console.log(htmlData);
   return {
     props: {
       title,
+      htmlData
     },
   };
 }

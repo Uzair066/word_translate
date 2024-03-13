@@ -2,7 +2,7 @@
 
 import { Message_data } from "../../context/context";
 import { useContext, useRef } from "react";
-import { Box, Button, Container, Grid, TextField } from "@mui/material";
+import { Box, Button, Container, Divider, Grid, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
@@ -12,7 +12,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import SaveIcon from "@mui/icons-material/Save";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function TranslateSentence() {
+function TranslateSentence({htmlData}) {
   const { theme } = useContext(Message_data);
   const router = useRouter();
 
@@ -289,6 +289,13 @@ function TranslateSentence() {
             </Button>
           </Box>
           </Grid>
+         
+          <Grid item xs={12} md={12} lg={12}>
+          <Divider
+            sx={{ marginTop: "40px", height: "2px", backgroundColor: "orange" }}
+          />
+          <div className="article-content" dangerouslySetInnerHTML={{ __html: htmlData?.article_text }} />
+        </Grid>
         </Grid>
       </Box>
     </Container>
